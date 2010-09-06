@@ -1,0 +1,10 @@
+E:\codebase\tax\tax\InstaTax\InstaTax.Tests\bin\Debug\InstaTax.Tests.dll
+E:\codebase\tax\tax\InstaTax\InstaTax.Tests\bin\Debug\InstaTax.Tests.pdb
+E:\codebase\tax\tax\InstaTax\InstaTax.Tests\bin\Debug\InstaTax.Core.dll
+E:\codebase\tax\tax\InstaTax\InstaTax.Tests\bin\Debug\Moq.dll
+E:\codebase\tax\tax\InstaTax\InstaTax.Tests\bin\Debug\nunit.framework.dll
+E:\codebase\tax\tax\InstaTax\InstaTax.Tests\bin\Debug\nunit.framework.xml
+E:\codebase\tax\tax\InstaTax\InstaTax.Tests\bin\Debug\InstaTax.Core.pdb
+E:\codebase\tax\tax\InstaTax\InstaTax.Tests\obj\Debug\ResolveAssemblyReference.cache
+E:\codebase\tax\tax\InstaTax\InstaTax.Tests\obj\Debug\InstaTax.Tests.dll
+E:\codebase\tax\tax\InstaTax\InstaTax.Tests\obj\Debug\InstaTax.Tests.pdb

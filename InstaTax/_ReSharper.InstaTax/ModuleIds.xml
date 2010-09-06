@@ -1,0 +1,4 @@
+<Modules>
+  <Module PersistentId="79230C74-84CA-49D9-9DC4-B0466A26D400" ModuleId="InstaTax.Core" />
+  <Module PersistentId="D137880F-6E14-4569-804C-4CDDCCFB8165" ModuleId="InstaTax.Tests" />
+</Modules>
