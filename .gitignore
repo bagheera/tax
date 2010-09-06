@@ -1,0 +1,12 @@
+**/bin
+**/obj
+**.user
+**.suo
+**/_ReSharper.GetIn/*
+**/_ReSharper.GetIn/CachesImage.bin
+*.sln.cache
+database/*.db
+b.log
+*~
+*.swp
+
