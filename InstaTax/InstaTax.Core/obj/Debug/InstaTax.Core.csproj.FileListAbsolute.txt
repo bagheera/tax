@@ -1,5 +1,0 @@
-E:\codebase\tax\tax\InstaTax\InstaTax.Core\bin\Debug\InstaTax.Core.dll
-E:\codebase\tax\tax\InstaTax\InstaTax.Core\bin\Debug\InstaTax.Core.pdb
-E:\codebase\tax\tax\InstaTax\InstaTax.Core\obj\Debug\ResolveAssemblyReference.cache
-E:\codebase\tax\tax\InstaTax\InstaTax.Core\obj\Debug\InstaTax.Core.dll
-E:\codebase\tax\tax\InstaTax\InstaTax.Core\obj\Debug\InstaTax.Core.pdb
