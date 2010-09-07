@@ -12,9 +12,9 @@ namespace InstaTax.Tests
         [Test]
         public void ValidPasswordsShouldContainAtLeastEightCharacters(){
             var password = new Password {PasswordString = "aA!"};
-            Assert.IsFalse(password.IsValid());
+            Assert.IsFalse(password.IsValidPassword());
             password.PasswordString = "aq334454A!";
-            Assert.IsTrue(password.IsValid());
+            Assert.IsTrue(password.IsValidPassword());
 
         }
 
@@ -38,17 +38,23 @@ namespace InstaTax.Tests
                 password.PasswordString = passwordCountPair.Key;
                 if (passwordCountPair.Value < 3)
                 {
-                    Assert.IsFalse(password.IsValid());
+                    Assert.IsFalse(password.IsValidPassword());
                 }
                 else
                 {
-                    Assert.IsTrue(password.IsValid());
+                    Assert.IsTrue(password.IsValidPassword());
                 }
 
 
             }
         }
 
+
+//        [Test]
+//        public void PasswordShouldExpireAfterTheExpiryDuration(){
+//            var password = new Password {PasswordString = "twewerer34#"};
+//            Assert.False(password.isExpired());
+//        }
     }
 
 }

@@ -51,7 +51,7 @@ namespace InstaTax.Core.DomainObjects
             return RegExpMatcher(SpecialCharRegExpMatcher);
         }
 
-        public bool IsValid(){
+        public bool IsValidPassword(){
 
             if(!HasRequiredLength())
                 return false;
@@ -76,6 +76,10 @@ namespace InstaTax.Core.DomainObjects
             if (HasAlteastOneSpecialCharacter())
                 pwStrength++;
             return pwStrength;
+        }
+
+        public bool isExpired(){
+            throw new NotImplementedException();
         }
     }
 }
