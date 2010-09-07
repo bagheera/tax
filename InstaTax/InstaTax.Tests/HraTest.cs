@@ -11,14 +11,15 @@ namespace InstaTax.Tests
     [TestFixture]
     public class HraCalulatorTest
     {
-        [Test, ExpectedException(typeof(ArgumentException))]
+        [Test]
         public void ProperFinancialYearShouldbeSupplied()
         {
             Hra hra = new Hra("e370881", "2011");
-            hra.getExcemptedAmount();
+            Assert.Throws<ArgumentException>(
+                () => hra.getExcemptedAmount());
         }
 
-        [Test, ExpectedException(typeof(Exception))]
+        [Test]
         public void SalaryBreakupForUserShouldBeAvailable()
         {
             string employeeId = "e370881";
@@ -29,10 +30,10 @@ namespace InstaTax.Tests
 
             Hra hra = new Hra(employeeId, financialYear);
             hra.setRepository(mockRepository.Object);
-            hra.getExcemptedAmount();
+            Assert.Throws<Exception>(() => hra.getExcemptedAmount());
         }
 
-        [Test, ExpectedException(typeof(Exception))]
+        [Test]
         public void RentPaidShouldBeAvailableBeforeCalculatingHRA()
         {
 
@@ -46,7 +47,7 @@ namespace InstaTax.Tests
 
             Hra hra = new Hra(employeeId, financialYear);
             hra.setRepository(mockRepository.Object);
-            hra.getExcemptedAmount();
+            Assert.Throws<Exception>(() => hra.getExcemptedAmount());
         }
     }
 }
