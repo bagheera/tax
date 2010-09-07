@@ -3,21 +3,22 @@ using System.Text.RegularExpressions;
 
 namespace InstaTax.Core.DomainObjects{
     public class Password{
+        private const int ExpiryDuration =90;
+        
         private const string CapRegExpMatcher = "[A-Z]";
         private const string SmallRegExpMatcher = "[a-z]";
         private const string DigitRegExpMatcher = "[0-9]";
         private const string SpecialCharRegExpMatcher = "[^a-zA-Z0-9]";
 
-        private String _passwordString;
+        public String PasswordString { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public Boolean ExpiryNotificationSent { get; set; }
 
-        public string PasswordString{
-            set { _passwordString = value; }
-        }
-
-        private bool HasRequiredLength(){
-            if (String.IsNullOrEmpty(_passwordString))
+        private bool HasRequiredLength()
+        {
+            if(String.IsNullOrEmpty(PasswordString))
                 return false;
-            if (_passwordString.Length < 8)
+            if (PasswordString.Length < 8)
                 return false;
             return true;
         }
@@ -27,7 +28,8 @@ namespace InstaTax.Core.DomainObjects{
         }
 
         private bool RegExpMatcher(String searchPhrase){
-            Match match = Regex.Match(_passwordString, searchPhrase);
+
+           Match match = Regex.Match(PasswordString, searchPhrase);
 
             return match.Success;
         }
@@ -69,8 +71,28 @@ namespace InstaTax.Core.DomainObjects{
             return pwStrength;
         }
 
-        public bool isExpired(){
-            throw new NotImplementedException();
+        public bool IsExpired(){
+           
+            if (DateTime.Now.Subtract(CreatedOn).Days > ExpiryDuration){
+                return true;
+            }
+            return false;
+        }
+
+       
+        public void SendNotificationOnPasswordExpiry(){
+
+            if(IsDueForExpiry() && !ExpiryNotificationSent){
+                Console.WriteLine("Reminder Email for password expiry was send");
+                ExpiryNotificationSent = true;
+            }
+        }
+
+        private bool IsDueForExpiry(){
+            if(DateTime.Now.Subtract(CreatedOn).Days > ExpiryDuration - 7){
+                return true;
+            }
+            return false;
         }
     }
 }
