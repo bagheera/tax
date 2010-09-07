@@ -46,11 +46,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAccess\SampleDataAccess.cs" />
-    <Compile Include="DomainObjects\Hra.cs" />
-    <Compile Include="DomainObjects\HraInfo.cs" />
-    <Compile Include="DomainObjects\IRepository.cs" />
-    <Compile Include="DomainObjects\Salary.cs" />
+    <Compile Include="DomainObjects\AnnualSalary.cs" />
     <Compile Include="DomainObjects\TestClass.cs" />
+    <Compile Include="DomainObjects\User.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
