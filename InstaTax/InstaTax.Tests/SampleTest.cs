@@ -5,14 +5,11 @@ using System.Text;
 using InstaTax.Core;
 using NUnit.Framework;
 
-namespace InstaTax.Tests
-{
+namespace InstaTax.Tests{
     [TestFixture]
-    public class SampleTest
-    {
+    public class SampleTest{
         [Test]
-        public void SampleTestMethod()
-        {
+        public void SampleTestMethod(){
             SampleClass test = new SampleClass();
             Assert.AreEqual("TESTING", test.SampleMethod());
         }

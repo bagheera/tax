@@ -3,24 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace InstaTax.Core
-{
-    public class AnnualSalary
-    {
+namespace InstaTax.Core{
+    public class AnnualSalary{
         public User TaxPayer { get; set; }
         public double Basic { get; set; }
         public double Hra { get; set; }
         public double SpecialAllowance { get; set; }
         public double ProfessionalTax { get; set; }
 
-        public AnnualSalary(User taxPayer, double basic, double hra, double specialAllowance, double professionalTax)
-        {
-            TaxPayer = taxPayer;
-            Basic = basic;
-            Hra = hra;
-            SpecialAllowance = specialAllowance;
-            ProfessionalTax = professionalTax;
-        }
+        //public AnnualSalary(User taxPayer, double basic, double hra, double specialAllowance, double professionalTax)
+        //{
+        //    TaxPayer = taxPayer;
+        //    Basic = basic;
+        //    Hra = hra;
+        //    SpecialAllowance = specialAllowance;
+        //    ProfessionalTax = professionalTax;
+        //}
 
 
         public double HraExemption(){
@@ -53,5 +51,5 @@ namespace InstaTax.Core
             else
                 return Basic*0.4;
         }
-    }                            
+    }
 }
