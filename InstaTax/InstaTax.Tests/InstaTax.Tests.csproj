@@ -50,6 +50,7 @@
     <Compile Include="HraTest.cs" />
     <Compile Include="SampleTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PasswordTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="lib\Moq.dll" />
