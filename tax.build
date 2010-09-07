@@ -6,6 +6,7 @@
 	<property name="core.path" value="${solution.path}/InstaTax.Core" />
 	<property name="test.core.path" value="${solution.path}/InstaTax.Test" />
 	<property name="solution.file" value="${solution.path}/InstaTax.sln" />
+	<property name="lib.path" value="${solution.path}/libraries" />
 	
 	<property name="build.dir" value="${basedir}/build" />
 	<property name="test.lib" value="${test.core.path}/lib" />
@@ -15,6 +16,11 @@
 	<target name="clean" description="cleans build directory">
 		<delete dir="${build.dir}" />
 		<mkdir dir="${build.dir}" />
+	</target>
+
+	<target name="create-db">
+		<delete file="database/instatax.db" />
+		<exec program="sqlite3.exe" basedir="${lib.path}" workingdir="database" commandline="-init DatabaseSchemas.sql instatax.db .quit"  />
 	</target>
 	
 	<target name="compile" description="compiles source code">
