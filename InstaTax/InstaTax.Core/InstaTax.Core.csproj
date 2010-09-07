@@ -49,7 +49,7 @@
   <ItemGroup>
     <Compile Include="DataAccess\SampleDataAccess.cs" />
     <Compile Include="DomainObjects\TestClass.cs" />
-    <Compile Include="DomainObjects\UserAuthenticator.cs" />
+    <Compile Include="DomainObjects\Password.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
