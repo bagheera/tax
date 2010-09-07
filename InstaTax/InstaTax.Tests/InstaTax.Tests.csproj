@@ -52,12 +52,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="lib\Moq.dll" />
+    <Content Include="lib\nunit.framework.dll" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\InstaTax.Core\InstaTax.Core.csproj">
       <Project>{79230C74-84CA-49D9-9DC4-B0466A26D400}</Project>
       <Name>InstaTax.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
