@@ -58,10 +58,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PasswordTest.cs" />
     <Compile Include="TaxSlabsTest.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="lib\Moq.dll" />
-    <Content Include="lib\nunit.framework.dll" />
+    <Compile Include="UserRegistrationTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\InstaTax.Core\InstaTax.Core.csproj">
