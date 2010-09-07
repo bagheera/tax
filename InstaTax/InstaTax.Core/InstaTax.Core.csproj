@@ -59,6 +59,7 @@
     </Compile>
     <Compile Include="SampleClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TaxSlabs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\Settings.settings">
