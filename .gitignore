@@ -1,0 +1,14 @@
+**/bin
+**/obj
+**.user
+**/*.suo
+**/_ReSharper.InstaTax/*
+**/_ReSharper.InstaTax/CachesImage.bin
+*.sln.cache
+database/*.db
+b.log
+*~
+*.swp
+**/InstaTax.*/bin/
+**/InstaTax.*/obj/
+build
