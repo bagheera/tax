@@ -19,14 +19,14 @@ namespace InstaTax.Tests{
             user.Save();
         }
 
-        [Test, ExpectedException(typeof(DuplicateUserException))]
+        [Test]
         public void ShouldNotRegisterUserIfNotUnique(){
             Mock<IUserRepository> repository = new Mock<IUserRepository>();
             Password password = new Password();
             password.PasswordString = "abc";
             User user = new User("a@a.com", password, repository.Object);
             repository.Setup(rep => rep.CheckIfUnique(user)).Returns(false);
-            user.Save();
+            Assert.Throws(typeof(DuplicateUserException), user.Save);
         }
 
         [Test]
