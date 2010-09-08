@@ -14,7 +14,7 @@ namespace InstaTax.Core.DomainObjects{
         public String PasswordString { get; set; }
         public DateTime CreatedOn { get; set; }
         public Boolean ExpiryNotificationSent { get; set; }
-        public PasswordHistory PasswordHistory { get; set; }
+        public PasswordHistory PswdHistory { get; set; }
 
         private bool HasRequiredLength(){
             if (String.IsNullOrEmpty(PasswordString))
@@ -55,7 +55,7 @@ namespace InstaTax.Core.DomainObjects{
             if (pwStrength < 3)
                 return false;
 
-            if (PasswordHistory.IsSameAsPriorPasswords(PasswordString))
+            if (PswdHistory.IsSameAsPriorPasswords(PasswordString))
                 return false;
 
             return true;
