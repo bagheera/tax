@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="DataAccess\SampleDataAccess.cs" />
     <Compile Include="DomainObjects\AnnualSalary.cs" />
+    <Compile Include="DomainObjects\Chapter6Investment.cs" />
     <Compile Include="DomainObjects\DuplicateUserException.cs" />
     <Compile Include="DomainObjects\TestClass.cs" />
     <Compile Include="DomainObjects\User.cs" />

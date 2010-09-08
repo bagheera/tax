@@ -12,19 +12,10 @@ namespace InstaTax.Core{
         public double SpecialAllowance { get; set; }
         public double ProfessionalTax { get; set; }
         private TaxSlabs TaxSlabs = TaxSlabs.GetInstance();
-
-        //public AnnualSalary(User taxPayer, double basic, double hra, double specialAllowance, double professionalTax)
-        //{
-        //    TaxPayer = taxPayer;
-        //    Basic = basic;
-        //    Hra = hra;
-        //    SpecialAllowance = specialAllowance;
-        //    ProfessionalTax = professionalTax;
-        //}
-
+        private Chapter6Investment investments;
 
         public double HraExemption(){
-            List<double> taxComponents = new List<double>();
+            var taxComponents = new List<double>();
             ValidateTaxComponents();
             taxComponents.Add(Hra);
             taxComponents.Add(PercentageOfBasicBasedOnLocality());
@@ -54,23 +45,23 @@ namespace InstaTax.Core{
                 return Basic*0.4;
         }
 
-        private double TaxableIncome()
-        {
-            return GrossIncome() - HraExemption() - ProfessionalTax - ChapterVIDeductions();
+        public Chapter6Investment Investments{
+            set { investments = value; }
         }
 
-        private double ChapterVIDeductions()
-        {
-            return 0;
+        public double GetChapter6Deductions(){
+            return investments == null ? 0 : investments.GetDeductions();
         }
 
-        private double GrossIncome()
-        {
+        private double TaxableIncome(){
+            return GrossIncome() - HraExemption() - ProfessionalTax - GetChapter6Deductions();
+        }
+
+        private double GrossIncome(){
             return Basic + Hra + SpecialAllowance;
         }
 
-        public double NetPayableTax()
-        {
+        public double NetPayableTax(){
             return TaxSlabs.ComputeTax(TaxableIncome(), TaxPayer);
         }
     }
