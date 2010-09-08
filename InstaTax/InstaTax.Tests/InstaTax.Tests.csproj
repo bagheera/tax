@@ -55,7 +55,6 @@
   <ItemGroup>
     <Compile Include="AnnualSalaryTest.cs" />
     <Compile Include="ChapterSixDeductionTest.cs" />
-    <Compile Include="SampleTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PasswordTest.cs" />
     <Compile Include="TaxSlabsTest.cs" />

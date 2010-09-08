@@ -7,14 +7,14 @@ namespace InstaTax.Tests{
     public class AnnualSalaryTest{
         [Test]
         public void ShouldBeAbleToCheckIfTaxPayeeIsFromMetro(){
-            var taxPayer = new User(50000, true);
+            var taxPayer = new User(50000, true, Gender.Male);
             Assert.True(taxPayer.FromMetro.Value);
         }
 
         [Test]
         public void ShouldBeAbleToGetBasicSalary(){
-            var taxPayer = new User(50000, true);
-            var annualSalary = new AnnualSalary()
+            var taxPayer = new User(50000, true, Gender.Female);
+            var annualSalary = new AnnualSalary
                                    {
                                        TaxPayer = taxPayer,
                                        Basic = 10000.50,
@@ -27,8 +27,8 @@ namespace InstaTax.Tests{
 
         [Test]
         public void ShouldBeAbleToGetHra(){
-            var taxPayer = new User(50000, true);
-            var annualSalary = new AnnualSalary()
+            var taxPayer = new User(50000, true, Gender.Female);
+            var annualSalary = new AnnualSalary
                                    {
                                        TaxPayer = taxPayer,
                                        Basic = 10000.50,
@@ -41,15 +41,15 @@ namespace InstaTax.Tests{
 
         [Test]
         public void ShouldBeAbleToGetRentPaid(){
-            var taxPayer = new User(50000, true);
+            var taxPayer = new User(50000, true, Gender.Male);
             Assert.AreEqual(50000, taxPayer.RentPaid);
         }
 
 
         [Test]
         public void ShouldCalculateHraExemption(){
-            var taxPayer = new User(50000, true);
-            var annualSalary = new AnnualSalary()
+            var taxPayer = new User(50000, true, Gender.Male);
+            var annualSalary = new AnnualSalary
                                    {
                                        TaxPayer = taxPayer,
                                        Basic = 100000,
@@ -62,8 +62,8 @@ namespace InstaTax.Tests{
 
         [Test]
         public void ShouldNotCalculateHraExemptionIfBasicSalaryIsNotAvailable(){
-            var taxPayer = new User(30000, null);
-            var annualSalary = new AnnualSalary()
+            var taxPayer = new User(30000, null, Gender.Male);
+            var annualSalary = new AnnualSalary
                                    {
                                        TaxPayer = taxPayer,
                                        Basic = 0,
@@ -76,8 +76,8 @@ namespace InstaTax.Tests{
 
         [Test]
         public void ShouldNotCalculateHraExemptionIfHraComponentIsNotAvailable(){
-            var taxPayer = new User(30000, true);
-            var annualSalary = new AnnualSalary()
+            var taxPayer = new User(30000, true, Gender.Male);
+            var annualSalary = new AnnualSalary
                                    {
                                        TaxPayer = taxPayer,
                                        Basic = 100000,
@@ -90,7 +90,7 @@ namespace InstaTax.Tests{
 
         [Test]
         public void ShouldNotCalculateHraExemptionIfTaxPayerIsNotAvailable(){
-            var annualSalary = new AnnualSalary()
+            var annualSalary = new AnnualSalary
                                    {
                                        TaxPayer = null,
                                        Basic = 100000,
@@ -103,8 +103,8 @@ namespace InstaTax.Tests{
 
         [Test]
         public void ShouldNotCalculateHraExemptionIfUserLocalityStatusIsNotAvailable(){
-            var taxPayer = new User(30000, null);
-            var annualSalary = new AnnualSalary()
+            var taxPayer = new User(30000, null, Gender.Male);
+            var annualSalary = new AnnualSalary
                                    {
                                        TaxPayer = taxPayer,
                                        Basic = 100000,
@@ -118,8 +118,8 @@ namespace InstaTax.Tests{
         [Test]
         public void ShouldReturnFiftyPercentageOfBasicAsHraExemptionWhenItIsMinimumOfAllTaxComponentsAndPayerIsFromMetro
             (){
-            var taxPayer = new User(65000, true);
-            var annualSalary = new AnnualSalary()
+                var taxPayer = new User(65000, true, Gender.Male);
+            var annualSalary = new AnnualSalary
                                    {
                                        TaxPayer = taxPayer,
                                        Basic = 100000,
@@ -133,8 +133,8 @@ namespace InstaTax.Tests{
         [Test]
         public void ShouldReturnFortyPercentageOfBasicAsHraExemptionWhenItIsMinimumOfAllTaxComponentsAndPayerIsFromMetro
             (){
-            var taxPayer = new User(65000, false);
-            var annualSalary = new AnnualSalary()
+                var taxPayer = new User(65000, false, Gender.Male);
+            var annualSalary = new AnnualSalary
                                    {
                                        TaxPayer = taxPayer,
                                        Basic = 100000,
@@ -148,8 +148,8 @@ namespace InstaTax.Tests{
 
         [Test]
         public void ShouldReturnHraAsHraExemptionWhenHraIsMinimumOfAllTaxComponents(){
-            var taxPayer = new User(50000, true);
-            var annualSalary = new AnnualSalary()
+            var taxPayer = new User(50000, true, Gender.Male);
+            var annualSalary = new AnnualSalary
                                    {
                                        TaxPayer = taxPayer,
                                        Basic = 100000,
@@ -162,8 +162,8 @@ namespace InstaTax.Tests{
 
         [Test]
         public void ShouldReturnRemtPaidAdjustedToBasicAsHraExemptionWhenItIsMinimumOfAllTaxComponents(){
-            var taxPayer = new User(30000, true);
-            var annualSalary = new AnnualSalary()
+            var taxPayer = new User(30000, true, Gender.Male);
+            var annualSalary = new AnnualSalary
                                    {
                                        TaxPayer = taxPayer,
                                        Basic = 100000,
@@ -173,5 +173,21 @@ namespace InstaTax.Tests{
                                    };
             Assert.AreEqual(20000, annualSalary.HraExemption());
         }
+
+        [Test]
+        public void ShouldGetNetPayableTax()
+        {
+            var taxPayer = new User(30000, true, Gender.Male);
+            var annualSalary = new AnnualSalary
+            {
+                TaxPayer = taxPayer,
+                Basic = 200000,
+                Hra = 60000,
+                ProfessionalTax = 100,
+                SpecialAllowance = 10
+            };
+            Assert.AreEqual(9991.0, annualSalary.NetPayableTax(),.01);
+        }
+
     }
 }
