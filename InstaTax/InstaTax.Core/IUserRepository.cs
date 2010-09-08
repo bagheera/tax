@@ -1,6 +1,11 @@
-namespace InstaTax.Core.DomainObjects{
+using System.Collections.Generic;
+using InstaTax.Core.DomainObjects;
+
+namespace InstaTax.Core
+{
     public interface IUserRepository{
-        bool CheckIfUnique(User user);
-        void Save(User user);
+        bool CheckIfUnique();
+        bool Save();
+        IList<User> LoadByEmailId();
     }
 }

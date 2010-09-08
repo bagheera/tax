@@ -1,5 +1,4 @@
-﻿using System;
-using InstaTax.Core;
+﻿using InstaTax.Core;
 using InstaTax.Core.DomainObjects;
 using Moq;
 using NUnit.Framework;
@@ -10,36 +9,32 @@ namespace InstaTax.Tests{
     {
         [Test]
         public void ShouldRegisterUserIfUnique(){
-            Mock<IUserRepository> repository = new Mock<IUserRepository>();
-            Password password = new Password();
-            password.PasswordString = "abc";
-            User user = new User("a@a.com", password, repository.Object);
-            repository.Setup(rep => rep.Save(user));
-            repository.Setup(rep => rep.CheckIfUnique(user)).Returns(true);
+            var repository = new Mock<IUserRepository>();
+            var password = new Password {PasswordString = "abc"};
+            var user = new User("a@a.com", password, repository.Object);
+            repository.Setup(rep => rep.Save());
+            repository.Setup(rep => rep.CheckIfUnique()).Returns(true);
             user.Save();
         }
 
         [Test]
         public void ShouldNotRegisterUserIfNotUnique(){
-            Mock<IUserRepository> repository = new Mock<IUserRepository>();
-            Password password = new Password();
-            password.PasswordString = "abc";
-            User user = new User("a@a.com", password, repository.Object);
-            repository.Setup(rep => rep.CheckIfUnique(user)).Returns(false);
-            Assert.Throws(typeof(DuplicateUserException), user.Save);
+            var repository = new Mock<IUserRepository>();
+            var password = new Password {PasswordString = "abc"};
+            var user = new User("a@a.com", password, repository.Object);
+            repository.Setup(rep => rep.CheckIfUnique()).Returns(false);
+            Assert.Throws<DuplicateUserException>(user.Save);
         }
 
         [Test]
         public void ShouldValidateUserId()
         {
-            Mock<IUserRepository> repository = new Mock<IUserRepository>();
-            Password password = new Password();
-            password.PasswordString = "abc";
-            string validUserId = "a@a.com";
-            string invalidUserId = "aaa";
-            User user = new User(validUserId, password, repository.Object);
+            var repository = new Mock<IUserRepository>();
+            var password = new Password {PasswordString = "abc"};
+            const string validUserId = "a@a.com";
+            const string invalidUserId = "aaa";
+            var user = new User(validUserId, password, repository.Object);
             Assert.IsTrue(user.IsValidId());
-
             user = new User(invalidUserId, password, repository.Object);
             Assert.IsFalse(user.IsValidId());
         }

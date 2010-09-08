@@ -1,32 +1,44 @@
 using System;
 using System.Text.RegularExpressions;
-using InstaTax.Core.DomainObjects;
 
-namespace InstaTax.Core{
+namespace InstaTax.Core.DomainObjects
+{
     public class User{
-        public double RentPaid { get; set; }
-        public bool? FromMetro { get; set; }
-        public IUserRepository repository;
-        public string Id { get; set; }
-        public Password Password { get; set; }
+        public virtual double RentPaid { get; set; }
+        public virtual bool? FromMetro { get; set; }
+        public virtual IUserRepository Repository { get; set; }
+        public virtual string EmailId { get; set; }
+        public virtual Password Password { get; set; }
+        public virtual string Id { get; set; }
+
+        public User()
+        {
+            
+        }
 
         public User(double rentPaid, bool? fromMetro){
             RentPaid = rentPaid;
             FromMetro = fromMetro;
         }
 
-        public User(string id, Password password, IUserRepository repository)
+        public User(string emailId, Password password, IUserRepository repository)
         {
-            this.repository = repository;
-            Id = id;
+            Repository = repository;
+            EmailId = emailId;
             Password = password;
         }
 
-        public void Save()
+        public User(string emailId, Password password)
         {
-            if (repository.CheckIfUnique(this))
+            EmailId = emailId;
+            Password = password;
+        }
+
+        public virtual void Save()
+        {
+            if (Repository.CheckIfUnique())
             {
-                repository.Save(this);
+                Repository.Save();
             }
             else
             {
@@ -34,15 +46,13 @@ namespace InstaTax.Core{
             }
         }
 
-        public bool IsValidId()
+        public virtual bool IsValidId()
         {
-            string strRegex = @"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}" +
-                  @"\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\" +
-                  @".)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$";
-            Regex re = new Regex(strRegex);
-            if (re.IsMatch(Id))
-                return (true);
-            return (false);
+            const string strRegex = @"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}" +
+                                    @"\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\" +
+                                    @".)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$";
+            var re = new Regex(strRegex);
+            return re.IsMatch(EmailId);
         }
     }
 }

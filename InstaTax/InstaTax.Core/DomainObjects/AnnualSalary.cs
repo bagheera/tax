@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using InstaTax.Core.DomainObjects;
 
 namespace InstaTax.Core{
     public class AnnualSalary{
