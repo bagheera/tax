@@ -67,11 +67,11 @@ namespace InstaTax.Core{
                 return Basic*0.4;
         }
 
-        public Chapter6Investment Investments{
+        public virtual Chapter6Investment Investments{
             set { investments = value; }
         }
 
-        public double GetChapter6Deductions(){
+        public virtual double GetChapter6Deductions(){
             return investments == null ? 0 : investments.GetDeductions();
         }
 
@@ -83,7 +83,7 @@ namespace InstaTax.Core{
             return Basic + Hra + SpecialAllowance;
         }
 
-        public double NetPayableTax(){
+        public virtual double NetPayableTax(){
             return TaxSlabs.ComputeTax(TaxableIncome(), TaxPayer);
         }
     }
