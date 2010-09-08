@@ -9,33 +9,14 @@ using NUnit.Framework;
 namespace InstaTax.Tests
 {
     [TestFixture]
-    public class UserPersistenceTest : NHibernateInMemoryTestFixtureBase
+    public class UserRepositoryTest
     {
-        private ISession session;
-
-        [TestFixtureSetUp]
-        public void TestFixtureSetUp()
-        {
-            InitalizeSessionFactory(new FileInfo(@"..\..\..\InstaTax.Core\DataAccess\User.hbm.xml"));
-        }
-
-        [SetUp]
-        public void SetUp()
-        {
-            session = CreateSession();
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            session.Dispose();
-        }
         [Test]
         public void ShouldSaveAndLoadUser()
         {
             var password = new Password { PasswordString = "abc" };
             var user = new User("b@c.com", password);
-            IUserRepository repository = new UserRepository(user, session);
+            IUserRepository repository = new UserRepository(user);
             user.Repository = repository;
             repository.Save();
             IList<User> people = repository.LoadByEmailId();  
@@ -49,7 +30,7 @@ namespace InstaTax.Tests
         {
             var password = new Password { PasswordString = "abc" };
             var user = new User("b@c.com", password);
-            IUserRepository repository = new UserRepository(user, session);
+            IUserRepository repository = new UserRepository(user);
             user.Repository = repository;
             repository.Save();
             Assert.IsFalse(repository.Save());
@@ -60,7 +41,7 @@ namespace InstaTax.Tests
         {
             var password = new Password { PasswordString = "abc" };
             var user = new User("b@c.com", password);
-            IUserRepository repository = new UserRepository(user, session);
+            IUserRepository repository = new UserRepository(user);
             user.Repository = repository;
             Assert.IsTrue(repository.CheckIfUnique());
             repository.Save();

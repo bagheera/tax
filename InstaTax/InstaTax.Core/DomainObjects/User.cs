@@ -14,7 +14,7 @@ namespace InstaTax.Core.DomainObjects
         public virtual string EmailId { get; set; }
         public virtual Password Password { get; set; }
         public virtual string Id { get; set; }
-        public Gender Gender { get; set; }
+        public virtual Gender Gender { get; set; }
 
         public User()
         {
@@ -61,7 +61,7 @@ namespace InstaTax.Core.DomainObjects
             return re.IsMatch(EmailId);
         }
 
-        public bool IsFemale()
+        public virtual bool IsFemale()
         {
             return Gender == Gender.Female;
         }

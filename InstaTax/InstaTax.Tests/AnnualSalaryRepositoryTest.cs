@@ -1,4 +1,6 @@
 ﻿using InstaTax.Core;
+using InstaTax.Core.DataAccess;
+using InstaTax.Core.DomainObjects;
 using NUnit.Framework;
 
 namespace InstaTax.Tests

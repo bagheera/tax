@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using InstaTax.Core.DataAccess;
 using InstaTax.Core.DomainObjects;
 using NHibernate;
 

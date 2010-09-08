@@ -11,4 +11,12 @@
     <property name="Hra" column="HRA" type="Double"/>
     <property name="SpecialAllowance" column="SpecialAllowance" type="Double"/>
   </class>
+  
+  <class name="InstaTax.Core.DomainObjects.User" table="User">
+    <id name="Id">
+      <generator class="native" />
+    </id>
+    <property name="EmailId" type="String" not-null="true" length="20" />
+  </class>
+  
 </hibernate-mapping>

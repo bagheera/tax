@@ -5,15 +5,13 @@ using NHibernate;
 
 namespace InstaTax.Core
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : NHibernateSetup, IUserRepository
     {
         public User User { get; set; }
-        public ISession Session { get; set; }
 
-        public UserRepository(User user, ISession session)
+        public UserRepository(User user)
         {
             User = user;
-            Session = session;
         }
 
         public bool CheckIfUnique()
