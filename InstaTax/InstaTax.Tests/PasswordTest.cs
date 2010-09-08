@@ -70,13 +70,13 @@ namespace InstaTax.Tests{
         public void NewPasswordShouldNotBeSameAsLastThreePassword(){
 
             var password = new Password {PasswordString = "twewerer34#", CreatedOn = DateTime.Today};
-            password.PasswordHistory = new PasswordHistory();
+            password.PswdHistory = new PasswordHistory();
             Assert.True(password.IsValidPassword());
 
             var priorOnePassword = new Password { PasswordString = "twewerer34#" };
             priorOnePassword.CreatedOn = DateTime.Today.AddDays(-12);
 
-            password.PasswordHistory.Add(priorOnePassword);
+            password.PswdHistory.Add(priorOnePassword);
             Assert.False(password.IsValidPassword());
         }
     }
