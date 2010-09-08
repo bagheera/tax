@@ -3,16 +3,23 @@ using System.Text.RegularExpressions;
 using InstaTax.Core.DomainObjects;
 
 namespace InstaTax.Core{
+
+    public enum Gender
+    {
+        Male, Female
+    }
     public class User{
         public double RentPaid { get; set; }
         public bool? FromMetro { get; set; }
         public IUserRepository repository;
         public string Id { get; set; }
         public Password Password { get; set; }
+        public Gender Gender { get; set; }
 
-        public User(double rentPaid, bool? fromMetro){
+        public User(double rentPaid, bool? fromMetro, Gender gender){
             RentPaid = rentPaid;
             FromMetro = fromMetro;
+            Gender = gender;
         }
 
         public User(string id, Password password, IUserRepository repository)

@@ -59,9 +59,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="SampleClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TaxSlabs.cs" />
+    <Compile Include="DomainObjects\TaxSlabs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\Settings.settings">
