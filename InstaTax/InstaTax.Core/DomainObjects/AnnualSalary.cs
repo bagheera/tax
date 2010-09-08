@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using InstaTax.Core.DomainObjects;
 
 namespace InstaTax.Core{
@@ -11,7 +10,8 @@ namespace InstaTax.Core{
         public double Hra { get; set; }
         public double SpecialAllowance { get; set; }
         public double ProfessionalTax { get; set; }
-        private TaxSlabs TaxSlabs = TaxSlabs.GetInstance();
+        public double Epf { get; set; }
+        private readonly TaxSlabs taxSlabs = TaxSlabs.GetInstance();
         private Chapter6Investment investments;
 
         public double HraExemption(){
@@ -41,16 +41,22 @@ namespace InstaTax.Core{
         private double PercentageOfBasicBasedOnLocality(){
             if (TaxPayer.FromMetro.Value)
                 return Basic*0.5;
-            else
-                return Basic*0.4;
+            return Basic*0.4;
         }
 
         public Chapter6Investment Investments{
             set { investments = value; }
         }
 
+
         public double GetChapter6Deductions(){
-            return investments == null ? 0 : investments.GetDeductions();
+            var totalInvestments = Epf;
+            if (investments != null){
+                totalInvestments += investments.GetTotal();
+            }
+            return (totalInvestments <= Chapter6Investment.Cap
+                        ? totalInvestments
+                        : Chapter6Investment.Cap);
         }
 
         private double TaxableIncome(){
@@ -62,7 +68,7 @@ namespace InstaTax.Core{
         }
 
         public double NetPayableTax(){
-            return TaxSlabs.ComputeTax(TaxableIncome(), TaxPayer);
+            return taxSlabs.ComputeTax(TaxableIncome(), TaxPayer);
         }
     }
 }
