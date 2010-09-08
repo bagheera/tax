@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace InstaTax.Core{
     public class AnnualSalary{
@@ -11,18 +10,12 @@ namespace InstaTax.Core{
         public double SpecialAllowance { get; set; }
         public double ProfessionalTax { get; set; }
 
-        //public AnnualSalary(User taxPayer, double basic, double hra, double specialAllowance, double professionalTax)
-        //{
-        //    TaxPayer = taxPayer;
-        //    Basic = basic;
-        //    Hra = hra;
-        //    SpecialAllowance = specialAllowance;
-        //    ProfessionalTax = professionalTax;
-        //}
+
+        private Chapter6Investment investments;
 
 
         public double HraExemption(){
-            List<double> taxComponents = new List<double>();
+            var taxComponents = new List<double>();
             ValidateTaxComponents();
             taxComponents.Add(Hra);
             taxComponents.Add(GetPercentageOfBasicBasedOnLocality());
@@ -47,9 +40,18 @@ namespace InstaTax.Core{
 
         private double GetPercentageOfBasicBasedOnLocality(){
             if (TaxPayer.FromMetro.Value)
-                return Basic*0.5;
-            else
+                return Basic*0.5;            else
                 return Basic*0.4;
         }
+
+        public Chapter6Investment Investments{
+            set { investments = value; }
+        }
+
+        public double GetChapter6Deductions(){
+            return investments == null ? 0 : investments.GetDeductions();
+        }
     }
+
+    
 }
