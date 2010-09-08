@@ -62,6 +62,10 @@ namespace InstaTax.Core.DomainObjects{
         public Boolean ExpiryNotificationSent { get; set; }
         public PasswordHistory PswdHistory { get; set; }
 
+        public Password(){
+            PswdHistory = new PasswordHistory();
+        }
+
         private bool HasRequiredLength(){
             if (String.IsNullOrEmpty(PasswordString))
                 return false;
