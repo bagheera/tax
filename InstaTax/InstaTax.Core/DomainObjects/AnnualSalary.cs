@@ -6,15 +6,37 @@ using InstaTax.Core.DomainObjects;
 
 namespace InstaTax.Core{
     public class AnnualSalary{
-        public User TaxPayer { get; set; }
-        public double Basic { get; set; }
-        public double Hra { get; set; }
-        public double SpecialAllowance { get; set; }
-        public double ProfessionalTax { get; set; }
+
+        public virtual IAnnualSalaryRepository Repository { get; set; }
+        public virtual User TaxPayer { get; set; }
+        public virtual double Basic { get; set; }
+        public virtual double Hra { get; set; }
+        public virtual double SpecialAllowance { get; set; }
+        public virtual double ProfessionalTax { get; set; }
         private TaxSlabs TaxSlabs = TaxSlabs.GetInstance();
         private Chapter6Investment investments;
+        public virtual string SalaryId
+        {
+            get; set;
+        }
 
-        public double HraExemption(){
+        public virtual string UserId
+        {
+            get { return TaxPayer.Id; }
+            set { TaxPayer.Id = value;}
+        }
+
+        //public AnnualSalary(User taxPayer, double basic, double hra, double specialAllowance, double professionalTax)
+        //{
+        //    TaxPayer = taxPayer;
+        //    Basic = basic;
+        //    Hra = hra;
+        //    SpecialAllowance = specialAllowance;
+        //    ProfessionalTax = professionalTax;
+        //}
+
+        public virtual double HraExemption()
+        {
             var taxComponents = new List<double>();
             ValidateTaxComponents();
             taxComponents.Add(Hra);
