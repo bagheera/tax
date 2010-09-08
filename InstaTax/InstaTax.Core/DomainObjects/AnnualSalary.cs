@@ -5,16 +5,28 @@ using InstaTax.Core.DomainObjects;
 
 namespace InstaTax.Core{
     public class AnnualSalary{
-        public User TaxPayer { get; set; }
-        public double Basic { get; set; }
-        public double Hra { get; set; }
-        public double SpecialAllowance { get; set; }
-        public double ProfessionalTax { get; set; }
-        public double Epf { get; set; }
-        private readonly TaxSlabs taxSlabs = TaxSlabs.GetInstance();
+        public virtual IAnnualSalaryRepository Repository { get; set; }
+        public virtual User TaxPayer { get; set; }
+        public virtual double Basic { get; set; }
+        public virtual double Hra { get; set; }
+        public virtual double SpecialAllowance { get; set; }
+        public virtual double ProfessionalTax { get; set; }
+        private readonly TaxSlabs TaxSlabs = TaxSlabs.GetInstance();
+        public virtual double Epf { get; set; }
         private Chapter6Investment investments;
+        public virtual string SalaryId
+        {
+            get; set;
+        }
 
-        public double HraExemption(){
+        public virtual string UserId
+        {
+            get { return TaxPayer.Id; }
+            set { TaxPayer.Id = value;}
+        }
+
+        public virtual double HraExemption()
+        {
             var taxComponents = new List<double>();
             ValidateTaxComponents();
             taxComponents.Add(Hra);
@@ -44,12 +56,11 @@ namespace InstaTax.Core{
             return Basic*0.4;
         }
 
-        public Chapter6Investment Investments{
+        public virtual Chapter6Investment Investments{
             set { investments = value; }
         }
 
-
-        public double GetChapter6Deductions(){
+        public virtual double GetChapter6Deductions(){
             var totalInvestments = Epf;
             if (investments != null){
                 totalInvestments += investments.GetTotal();
@@ -67,8 +78,8 @@ namespace InstaTax.Core{
             return Basic + Hra + SpecialAllowance;
         }
 
-        public double NetPayableTax(){
-            return taxSlabs.ComputeTax(TaxableIncome(), TaxPayer);
+        public virtual double NetPayableTax(){
+            return TaxSlabs.ComputeTax(TaxableIncome(), TaxPayer);
         }
     }
 }

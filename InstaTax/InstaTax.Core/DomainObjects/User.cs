@@ -12,9 +12,13 @@ namespace InstaTax.Core{
         public double RentPaid { get; set; }
         public bool? FromMetro { get; set; }
         public IUserRepository repository;
-        public string Id { get; set; }
+        public virtual string Id { get; set; }
         public Password Password { get; set; }
         public Gender Gender { get; set; }
+
+        public User()
+        {
+        }
 
         public User(double rentPaid, bool? fromMetro, Gender gender){
             RentPaid = rentPaid;
@@ -50,6 +54,11 @@ namespace InstaTax.Core{
             if (re.IsMatch(Id))
                 return (true);
             return (false);
+        }
+
+        public bool IsFemale()
+        {
+            return Gender == Gender.Female;
         }
     }
 }

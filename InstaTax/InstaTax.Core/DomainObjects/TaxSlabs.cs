@@ -51,7 +51,7 @@ namespace InstaTax.Core.DomainObjects{
 
         private List<TaxSlab> GetAppropriateTaxSlabs(User taxPayer)
         {
-            if (Gender.Female == taxPayer.Gender){
+            if (taxPayer.IsFemale()){
                 return _femaleTaxSlabs;
             }
             return _maleTaxSlabs;
@@ -66,12 +66,12 @@ namespace InstaTax.Core.DomainObjects{
         }
 
         public double PercentTaxable { get; set; }
-        public double SlabValue { get; set; }
+        public double SlabValue { get; private set; }
 
         public double GetTax(double taxableIncome)
-        {   
+        {
             if (taxableIncome > SlabValue)
-                return (PercentTaxable * SlabValue) / 100.00;
+                taxableIncome = SlabValue;
             return (PercentTaxable * taxableIncome) / 100.00;
         }
     }
