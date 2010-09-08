@@ -40,4 +40,15 @@ namespace InstaTax.Tests{
         }
 
     }
+
+    [TestFixture]
+    public class UserTest
+    {
+        [Test]
+        public void ShouldReturnTrueIfTaxPayerIsFemale()
+        {
+            User taxPayer = new User(0, false, Gender.Female);
+            Assert.True(taxPayer.IsFemale());
+        }
+    }
 }

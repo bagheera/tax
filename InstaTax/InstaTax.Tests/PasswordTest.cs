@@ -63,8 +63,21 @@ namespace InstaTax.Tests{
             password.ExpiryNotificationSent = false;
             password.SendNotificationOnPasswordExpiry();
             Assert.False(password.ExpiryNotificationSent);
+        }
 
 
+        [Test]
+        public void NewPasswordShouldNotBeSameAsLastThreePassword(){
+
+            var password = new Password {PasswordString = "twewerer34#", CreatedOn = DateTime.Today};
+            password.PswdHistory = new PasswordHistory();
+            Assert.True(password.IsValidPassword());
+
+            var priorOnePassword = new Password { PasswordString = "twewerer34#" };
+            priorOnePassword.CreatedOn = DateTime.Today.AddDays(-12);
+
+            password.PswdHistory.Add(priorOnePassword);
+            Assert.False(password.IsValidPassword());
         }
     }
 }

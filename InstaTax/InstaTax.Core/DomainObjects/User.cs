@@ -1,8 +1,12 @@
-using System;
 using System.Text.RegularExpressions;
 
 namespace InstaTax.Core.DomainObjects
 {
+    public enum Gender
+    {
+        Male, Female
+    }
+
     public class User{
         public virtual double RentPaid { get; set; }
         public virtual bool? FromMetro { get; set; }
@@ -10,15 +14,17 @@ namespace InstaTax.Core.DomainObjects
         public virtual string EmailId { get; set; }
         public virtual Password Password { get; set; }
         public virtual string Id { get; set; }
+        public Gender Gender { get; set; }
 
         public User()
         {
-            
+
         }
 
-        public User(double rentPaid, bool? fromMetro){
+        public User(double rentPaid, bool? fromMetro, Gender gender){
             RentPaid = rentPaid;
             FromMetro = fromMetro;
+            Gender = gender;
         }
 
         public User(string emailId, Password password, IUserRepository repository)
@@ -53,6 +59,11 @@ namespace InstaTax.Core.DomainObjects
                                     @".)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$";
             var re = new Regex(strRegex);
             return re.IsMatch(EmailId);
+        }
+
+        public bool IsFemale()
+        {
+            return Gender == Gender.Female;
         }
     }
 }

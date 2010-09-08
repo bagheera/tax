@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" auto-import="true" assembly="InstaTax.Core" namespace="InstaTax.Core">
+
+  <class name="InstaTax.Core.AnnualSalary" table="AnnualSalary">
+    <id name="SalaryId">
+      <generator class="native" />
+    </id>
+    <property name="UserId" column="UserID" type="String" length="40"/>
+    <property name="Basic" column="Basic" type="Double"/>
+    <property name="ProfessionalTax" column="ProfessionalTax" type="Double"/>
+    <property name="Hra" column="HRA" type="Double"/>
+    <property name="SpecialAllowance" column="SpecialAllowance" type="Double"/>
+  </class>
+</hibernate-mapping>
