@@ -51,7 +51,6 @@ namespace InstaTax.Core.DomainObjects{
 
     public class Password{
         private const int ExpiryDuration = 90;
-
         private const string CapRegExpMatcher = "[A-Z]";
         private const string SmallRegExpMatcher = "[a-z]";
         private const string DigitRegExpMatcher = "[0-9]";
@@ -80,7 +79,6 @@ namespace InstaTax.Core.DomainObjects{
 
         private bool RegExpMatcher(String searchPhrase){
             Match match = Regex.Match(PasswordString, searchPhrase);
-
             return match.Success;
         }
 
@@ -104,13 +102,11 @@ namespace InstaTax.Core.DomainObjects{
 
             if (pwStrength < 3)
                 return false;
-
             if (PswdHistory.IsSameAsPriorPasswords(PasswordString))
                 return false;
 
             return true;
         }
-
 
         private int GetPasswordStrength(){
             var pwStrength = 0;
@@ -132,7 +128,6 @@ namespace InstaTax.Core.DomainObjects{
             return false;
         }
 
-
         public void SendNotificationOnPasswordExpiry(){
             if (IsDueForExpiry() && !ExpiryNotificationSent){
                 Console.WriteLine("Reminder Email for password expiry was send");
@@ -147,6 +142,4 @@ namespace InstaTax.Core.DomainObjects{
             return false;
         }
     }
-
-   
 }
