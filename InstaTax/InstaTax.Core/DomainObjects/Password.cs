@@ -3,6 +3,52 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace InstaTax.Core.DomainObjects{
+
+    public class PasswordHistory
+    {
+        private IList<Password> PriorPasswords { get; set; }
+
+        public PasswordHistory()
+        {
+            PriorPasswords = new List<Password>();
+        }
+
+        public bool IsSameAsPriorPasswords(String newPassword)
+        {
+            var lastThreePriorPasswords = GetLastThreePriorPasswords();
+            foreach (Password priorPassword in lastThreePriorPasswords)
+            {
+                if (newPassword.Equals(priorPassword.PasswordString))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private IList<Password> GetLastThreePriorPasswords()
+        {
+
+            var lastThreePriorPasswords = new List<Password>();
+            int count = 0;
+
+            foreach (Password priorPassword in PriorPasswords)
+            {
+                count++;
+                if (count > 3) break;
+                lastThreePriorPasswords.Add(priorPassword);
+            }
+            return lastThreePriorPasswords;
+        }
+
+
+        public void Add(Password priorOnePassword)
+        {
+            PriorPasswords.Add(priorOnePassword);
+        }
+    }
+
+
     public class Password{
         private const int ExpiryDuration = 90;
 
@@ -98,39 +144,5 @@ namespace InstaTax.Core.DomainObjects{
         }
     }
 
-    public class PasswordHistory{
-        private IList<Password> PriorPasswords { get; set; }
-
-        public PasswordHistory(){
-            PriorPasswords = new List<Password>();
-        }
-
-        public bool IsSameAsPriorPasswords(String newPassword){
-            var lastThreePriorPasswords = GetLastThreePriorPasswords();
-            foreach (Password priorPassword in lastThreePriorPasswords){
-                if (newPassword.Equals(priorPassword.PasswordString)){
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        private IList<Password> GetLastThreePriorPasswords(){
-
-            var lastThreePriorPasswords = new List<Password>();
-            int count = 0;
-
-            foreach (Password priorPassword in PriorPasswords){
-                count++;
-                if (count > 3) break;
-                lastThreePriorPasswords.Add(priorPassword);
-            }
-            return lastThreePriorPasswords;
-        }
-
-
-        public void Add(Password priorOnePassword){
-            PriorPasswords.Add(priorOnePassword);
-        }
-    }
+   
 }
