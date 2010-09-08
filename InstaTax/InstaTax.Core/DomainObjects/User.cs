@@ -51,5 +51,10 @@ namespace InstaTax.Core{
                 return (true);
             return (false);
         }
+
+        public bool IsFemale()
+        {
+            return Gender == Gender.Female;
+        }
     }
 }
