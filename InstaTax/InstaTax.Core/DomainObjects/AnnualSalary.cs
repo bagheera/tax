@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using InstaTax.Core.DataAccess;
 using InstaTax.Core.DomainObjects;
 
 namespace InstaTax.Core{
     public class AnnualSalary{
-
         public virtual IAnnualSalaryRepository Repository { get; set; }
         public virtual User TaxPayer { get; set; }
         public virtual double Basic { get; set; }
         public virtual double Hra { get; set; }
         public virtual double SpecialAllowance { get; set; }
         public virtual double ProfessionalTax { get; set; }
-        private TaxSlabs TaxSlabs = TaxSlabs.GetInstance();
+        private readonly TaxSlabs TaxSlabs = TaxSlabs.GetInstance();
+        public virtual double Epf { get; set; }
         private Chapter6Investment investments;
         public virtual string SalaryId
         {
@@ -26,15 +25,6 @@ namespace InstaTax.Core{
             get { return TaxPayer.Id; }
             set { TaxPayer.Id = value;}
         }
-
-        //public AnnualSalary(User taxPayer, double basic, double hra, double specialAllowance, double professionalTax)
-        //{
-        //    TaxPayer = taxPayer;
-        //    Basic = basic;
-        //    Hra = hra;
-        //    SpecialAllowance = specialAllowance;
-        //    ProfessionalTax = professionalTax;
-        //}
 
         public virtual double HraExemption()
         {
@@ -64,8 +54,7 @@ namespace InstaTax.Core{
         private double PercentageOfBasicBasedOnLocality(){
             if (TaxPayer.FromMetro.Value)
                 return Basic*0.5;
-            else
-                return Basic*0.4;
+            return Basic*0.4;
         }
 
         public virtual Chapter6Investment Investments{
@@ -73,7 +62,13 @@ namespace InstaTax.Core{
         }
 
         public virtual double GetChapter6Deductions(){
-            return investments == null ? 0 : investments.GetDeductions();
+            var totalInvestments = Epf;
+            if (investments != null){
+                totalInvestments += investments.GetTotal();
+            }
+            return (totalInvestments <= Chapter6Investment.Cap
+                        ? totalInvestments
+                        : Chapter6Investment.Cap);
         }
 
         private double TaxableIncome(){
