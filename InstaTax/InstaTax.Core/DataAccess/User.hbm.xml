@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" auto-import="true" assembly="orm_intro" namespace="orm_intro">
+  <class name="User" table="User">
+    <id name="Id">
+      <generator class="native" />
+    </id>
+    <property name="Username" type="String" not-null="true" length="20" />
+    <property name="PasswordString" type="String" not-null="true" />
+    <component name="Name">
+      <property name="FirstName" type="String" not-null="true" length="40" />
+      <property name="LastName" type="String" not-null="true" length="40" />
+    </component>
+    <component name="Address">
+      <property name="StreetAddress" type="String" not-null="true" length="120" />
+      <property name="City" type="String" not-null="true" length="120" />
+      <property name="Zipcode" type="String" not-null="true" length="120" />
+    </component>    
+  </class>
+</hibernate-mapping>
