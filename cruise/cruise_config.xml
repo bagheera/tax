@@ -1,0 +1,28 @@
+<pipeline name="DevImmersion">
+  <materials>
+    <git url="git://github.com/bagheera/tax.git" />
+  </materials>
+  <stage name="Compile">
+    <jobs>
+      <job name="Compile">
+        <tasks>
+          <exec command="b.bat">
+            <arg value="clean" />
+            <arg value="compile" />
+          </exec>
+        </tasks>
+      </job>
+    </jobs>
+  </stage>
+  <stage name="Tests">
+    <jobs>
+      <job name="UnitTests">
+        <tasks>
+          <exec command="b.bat">
+            <arg value="build" />
+          </exec>
+        </tasks>
+      </job>
+    </jobs>
+  </stage>
+</pipeline>
