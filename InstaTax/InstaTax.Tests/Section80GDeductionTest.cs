@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace InstaTax.Tests
 {
     [TestFixture]
-    class Section80GDeductionTest
+    public class Section80GDeductionTest
     {
         [Test]
         public void DeductionShouldBeZeroWhenNoDonationUnder80G()
