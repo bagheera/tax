@@ -72,7 +72,11 @@ namespace InstaTax.Core{
         }
 
         private double TaxableIncome(){
-            return GrossIncome() - HraExemption() - ProfessionalTax - GetChapter6Deductions();
+            return GrossIncome() - HraExemption() - ProfessionalTax - GetChapter6Deductions() - GetHousingLoanInterestAmount();
+        }
+
+        private double GetHousingLoanInterestAmount(){
+            return TaxPayer.HousingLoanInterestAmount;
         }
 
         private double GrossIncome(){
