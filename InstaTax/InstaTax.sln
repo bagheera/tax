@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstaTax.Core", "InstaTax.Core\InstaTax.Core.csproj", "{79230C74-84CA-49D9-9DC4-B0466A26D400}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstaTax.Tests", "InstaTax.Tests\InstaTax.Tests.csproj", "{D137880F-6E14-4569-804C-4CDDCCFB8165}"

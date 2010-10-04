@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="InstaTax">
+</Property><Property Name="Solution File" Value="E:\Immersion\Immersion\Tax\InstaTax\InstaTax.sln">
+</Property><Property Name="User Options File" Value="E:\Immersion\Immersion\Tax\InstaTax\InstaTax.suo">
+</Property><Property Name="Date" Value="04 October 2010">
+</Property><Property Name="Time" Value="14:30">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="InstaTax.sln" Description="File successfully backed up as E:\Immersion\Immersion\Tax\InstaTax\Backup\InstaTax.sln">
+</Event><Event ErrorLevel="0" Project="" Source="InstaTax.suo" Description="File successfully backed up as E:\Immersion\Immersion\Tax\InstaTax\Backup\InstaTax.suo">
+</Event><Event ErrorLevel="0" Project="InstaTax.Core" Source="InstaTax.Core\InstaTax.Core.csproj" Description="Project file successfully backed up as E:\Immersion\Immersion\Tax\InstaTax\Backup\InstaTax.Core\InstaTax.Core.csproj">
+</Event><Event ErrorLevel="0" Project="InstaTax.Core" Source="InstaTax.Core\DataAccess\IAnnualSalaryRepository.cs" Description="File successfully backed up as E:\Immersion\Immersion\Tax\InstaTax\Backup\InstaTax.Core\DataAccess\IAnnualSalaryRepository.cs">
+</Event><Event ErrorLevel="0" Project="InstaTax.Core" Source="InstaTax.Core\DataAccess\NHibernateSetup.cs" Description="File successfully backed up as E:\Immersion\Immersion\Tax\InstaTax\Backup\InstaTax.Core\DataAccess\NHibernateSetup.cs">
+</Event><Event ErrorLevel="0" Project="InstaTax.Core" Source="InstaTax.Core\DataAccess\AnnualSalaryRepository.cs" Description="File successfully backed up as E:\Immersion\Immersion\Tax\InstaTax\Backup\InstaTax.Core\DataAccess\AnnualSalaryRepository.cs">
+</Event><Event ErrorLevel="0" Project="InstaTax.Core" Source="InstaTax.Core\DataAccess\SampleDataAccess.cs" Description="File successfully backed up as E:\Immersion\Immersion\Tax\InstaTax\Backup\InstaTax.Core\DataAccess\SampleDataAccess.cs">
+</Event><Event ErrorLevel="0" Project="InstaTax.Core" Source="InstaTax.Core\DomainObjects\AnnualSalary.cs" Description="File successfully backed up as E:\Immersion\Immersion\Tax\InstaTax\Backup\InstaTax.Core\DomainObjects\AnnualSalary.cs">
+</Event><Event ErrorLevel="0" Project="InstaTax.Core" Source="InstaTax.Core\DomainObjects\Chapter6Investment.cs" Description="File successfully backed up as E:\Immersion\Immersion\Tax\InstaTax\Backup\InstaTax.Core\DomainObjects\Chapter6Investment.cs">
+</Event><Event ErrorLevel="0" Project="InstaTax.Core" Source="InstaTax.Core\DomainObjects\DuplicateUserException.cs" Description="File successfully backed up as E:\Immersion\Immersion\Tax\InstaTax\Backup\InstaTax.Core\DomainObjects\DuplicateUserException.cs">
+</Event><Event ErrorLevel="0" Project="InstaTax.Core" Source="InstaTax.Core\DomainObjects\TestClass.cs" Description="File successfully backed up as E:\Immersion\Immersion\Tax\InstaTax\Backup\InstaTax.Core\DomainObjects\TestClass.cs">
+</Event><Event ErrorLevel="0" Project="InstaTax.Core" Source="InstaTax.Core\DomainObjects\User.cs" Description="File successfully backed up as E:\Immersion\Immersion\Tax\InstaTax\Backup\InstaTax.Core\DomainObjects\User.cs">
+</Event><Event ErrorLevel="0" Project="InstaTax.Core" Source="InstaTax.Core\DomainObjects\Password.cs" Description="File successfully backed up as E:\Immersion\Immersion\Tax\InstaTax\Backup\InstaTax.Core\DomainObjects\Password.cs">
+</Event><Event ErrorLevel="0" Project="InstaTax.Core" Source="InstaTax.Core\IUserRepository.cs" Description="File successfully backed up as E:\Immersion\Immersion\Tax\InstaTax\Backup\InstaTax.Core\IUserRepository.cs">
+</Event><Event ErrorLevel="0" Project="InstaTax.Core" Source="InstaTax.Core\Properties\Settings.Designer.cs" Description="File successfully backed up as E:\Immersion\Immersion\Tax\InstaTax\Backup\InstaTax.Core\Properties\Settings.Designer.cs">
+</Event><Event ErrorLevel="0" Project="InstaTax.Core" Source="InstaTax.Core\Properties\AssemblyInfo.cs" Description="File successfully backed up as E:\Immersion\Immersion\Tax\InstaTax\Backup\InstaTax.Core\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="InstaTax.Core" Source="InstaTax.Core\UserRepository.cs" Description="File successfully backed up as E:\Immersion\Immersion\Tax\InstaTax\Backup\InstaTax.Core\UserRepository.cs">
+</Event><Event ErrorLevel="0" Project="InstaTax.Core" Source="InstaTax.Core\DomainObjects\TaxSlabs.cs" Description="File successfully backed up as E:\Immersion\Immersion\Tax\InstaTax\Backup\InstaTax.Core\DomainObjects\TaxSlabs.cs">
+</Event><Event ErrorLevel="0" Project="InstaTax.Core" Source="InstaTax.Core\Properties\Settings.settings" Description="File successfully backed up as E:\Immersion\Immersion\Tax\InstaTax\Backup\InstaTax.Core\Properties\Settings.settings">
+</Event><Event ErrorLevel="0" Project="InstaTax.Core" Source="InstaTax.Core\DataAccess\InstaTax.hbm.xml" Description="File successfully backed up as E:\Immersion\Immersion\Tax\InstaTax\Backup\InstaTax.Core\DataAccess\InstaTax.hbm.xml">
+</Event><Event ErrorLevel="0" Project="InstaTax.Core" Source="InstaTax.Core\DataAccess\System.Data.SQLite.xml" Description="File successfully backed up as E:\Immersion\Immersion\Tax\InstaTax\Backup\InstaTax.Core\DataAccess\System.Data.SQLite.xml">
+</Event><Event ErrorLevel="0" Project="InstaTax.Core" Source="InstaTax.Core\InstaTax.Core.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="InstaTax.Core" Source="InstaTax.Core\InstaTax.Core.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="InstaTax.Tests" Source="InstaTax.Tests\InstaTax.Tests.csproj" Description="Project file successfully backed up as E:\Immersion\Immersion\Tax\InstaTax\Backup\InstaTax.Tests\InstaTax.Tests.csproj">
+</Event><Event ErrorLevel="0" Project="InstaTax.Tests" Source="InstaTax.Tests\AnnualSalaryRepositoryTest.cs" Description="File successfully backed up as E:\Immersion\Immersion\Tax\InstaTax\Backup\InstaTax.Tests\AnnualSalaryRepositoryTest.cs">
+</Event><Event ErrorLevel="0" Project="InstaTax.Tests" Source="InstaTax.Tests\AnnualSalaryTest.cs" Description="File successfully backed up as E:\Immersion\Immersion\Tax\InstaTax\Backup\InstaTax.Tests\AnnualSalaryTest.cs">
+</Event><Event ErrorLevel="0" Project="InstaTax.Tests" Source="InstaTax.Tests\ChapterSixDeductionTest.cs" Description="File successfully backed up as E:\Immersion\Immersion\Tax\InstaTax\Backup\InstaTax.Tests\ChapterSixDeductionTest.cs">
+</Event><Event ErrorLevel="0" Project="InstaTax.Tests" Source="InstaTax.Tests\Properties\AssemblyInfo.cs" Description="File successfully backed up as E:\Immersion\Immersion\Tax\InstaTax\Backup\InstaTax.Tests\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="InstaTax.Tests" Source="InstaTax.Tests\PasswordTest.cs" Description="File successfully backed up as E:\Immersion\Immersion\Tax\InstaTax\Backup\InstaTax.Tests\PasswordTest.cs">
+</Event><Event ErrorLevel="0" Project="InstaTax.Tests" Source="InstaTax.Tests\TaxSlabsTest.cs" Description="File successfully backed up as E:\Immersion\Immersion\Tax\InstaTax\Backup\InstaTax.Tests\TaxSlabsTest.cs">
+</Event><Event ErrorLevel="0" Project="InstaTax.Tests" Source="InstaTax.Tests\UserPersistenceTest.cs" Description="File successfully backed up as E:\Immersion\Immersion\Tax\InstaTax\Backup\InstaTax.Tests\UserPersistenceTest.cs">
+</Event><Event ErrorLevel="0" Project="InstaTax.Tests" Source="InstaTax.Tests\UserRegistrationTests.cs" Description="File successfully backed up as E:\Immersion\Immersion\Tax\InstaTax\Backup\InstaTax.Tests\UserRegistrationTests.cs">
+</Event><Event ErrorLevel="0" Project="InstaTax.Tests" Source="InstaTax.Tests\App.config" Description="File successfully backed up as E:\Immersion\Immersion\Tax\InstaTax\Backup\InstaTax.Tests\App.config">
+</Event><Event ErrorLevel="0" Project="InstaTax.Tests" Source="InstaTax.Tests\InstaTax.Tests.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="InstaTax.Tests" Source="InstaTax.Tests\InstaTax.Tests.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="InstaTax.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="InstaTax.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="InstaTax.Core" Source="InstaTax.Core\InstaTax.Core.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="InstaTax.Tests" Source="InstaTax.Tests\InstaTax.Tests.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>
