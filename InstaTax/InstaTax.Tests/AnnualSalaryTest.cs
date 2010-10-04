@@ -190,5 +190,20 @@ namespace InstaTax.Tests{
             Assert.AreEqual(9991.0, annualSalary.NetPayableTax(),.01);
         }
 
+        [Test]
+        public void ShouldExemptHousingLoanInterestFromBeingTaxed(){
+
+            var taxPayer = new User(30000, true, Gender.Male){HousingLoanInterestAmount=10000};
+            var annualSalary = new AnnualSalary
+            {
+                TaxPayer = taxPayer,
+                Basic = 200000,
+                Hra = 60000,
+                ProfessionalTax = 100,
+                SpecialAllowance = 10
+            };
+
+            Assert.AreEqual(8991.0, annualSalary.NetPayableTax(), .01);
+        }
     }
 }
