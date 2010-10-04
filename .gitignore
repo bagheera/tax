@@ -12,3 +12,5 @@ b.log
 **/InstaTax.*/bin/
 **/InstaTax.*/obj/
 build
+/InstaTax/_UpgradeReport_Files
+/InstaTax/_ReSharper.InstaTax
