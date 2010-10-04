@@ -119,5 +119,43 @@ namespace InstaTax.Tests{
             Assert.Throws<ArgumentException>(() => new PublicProvidentFund(70000.01));
         }
 
+        [Test]
+        public void ShouldReturnDeductionCapAsDeductionWhenOnlyHousingLoanPrincipalAsInvestementWithEpfAsZeroAndExceedsTheCap()
+        {
+            var investments = new Chapter6Investment();
+            investments.Add(new HousingLoanPrincipal(100001));
+            var salary = new AnnualSalary { Investments = investments, Epf = 0 };
+            Assert.AreEqual(Chapter6Investment.Cap, salary.GetChapter6Deductions(), 0.01);
+        }
+
+        [Test]
+        public void ShouldReturnDeductionCapAsDeductionWhenOnlyHousingLoanPrincipalAsInvestementWithEpfAndExceedsTheCap()
+        {
+            var investments = new Chapter6Investment();
+            investments.Add(new HousingLoanPrincipal(90001));
+            var salary = new AnnualSalary { Investments = investments, Epf = 10000 };
+            Assert.AreEqual(Chapter6Investment.Cap, salary.GetChapter6Deductions(), 0.01);
+        }
+
+        [Test]
+        public void ShouldReturnTotalDeductionsAsDeductionWhenOnlyHousingLoanPrincipalAsInvestementWithEpfAndUnderTheCap()
+        {
+            var investments = new Chapter6Investment();
+            investments.Add(new HousingLoanPrincipal(60001));
+            var salary = new AnnualSalary { Investments = investments, Epf = 10000 };
+            Assert.AreEqual(70001, salary.GetChapter6Deductions(), 0.01);
+        }
+
+        [Test]
+        public void ShouldReturnTotalDeductionsAsDeductionWhenOnlyHousingLoanPrincipalAsInvestementWithEpfAsZeroAndUnderTheCap()
+        {
+            var investments = new Chapter6Investment();
+            investments.Add(new HousingLoanPrincipal(60001));
+            var salary = new AnnualSalary { Investments = investments, Epf = 0 };
+            Assert.AreEqual(60001, salary.GetChapter6Deductions(), 0.01);
+        }
+
     }
+
+    
 }
