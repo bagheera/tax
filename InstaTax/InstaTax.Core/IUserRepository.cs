@@ -7,5 +7,8 @@ namespace InstaTax.Core
         bool CheckIfUnique();
         bool Save();
         IList<User> LoadByEmailId();
+
+        void SaveAnnualSalary(AnnualSalary salary);
+        AnnualSalary GetAnnualSalary(User user);
     }
 }
