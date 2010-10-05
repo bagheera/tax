@@ -35,7 +35,15 @@ namespace InstaTax.Core {
         }
 
         private double AdjustedRentPaidToBasic(double rentPaid){
-            return rentPaid - Basic * 0.1;
+            if (rentPaid > (Basic * 0.1))
+            {
+                return rentPaid - Basic * 0.1;               
+            }
+            else
+            {
+                return rentPaid;
+            }
+ 
         }
 
         private double PercentageOfBasicBasedOnLocality(bool? fromMetro){
@@ -44,12 +52,6 @@ namespace InstaTax.Core {
             return Basic*0.4;
         }
 
-        private DonationsUnder80G donationsUnder80G = new DonationsUnder80G();
-        public virtual DonationsUnder80G DonationsUnder80G  
-        {
-            protected get { return donationsUnder80G; }
-            set { donationsUnder80G = value ?? new DonationsUnder80G(); }
-        }
 
         public double GetTaxableSalary()
         {

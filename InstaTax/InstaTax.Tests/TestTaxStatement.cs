@@ -28,8 +28,24 @@ namespace InstaTax.Tests
                                        SpecialAllowance = 10
                                    };
             TaxStatement stmt = new TaxStatement(asal);
-            Assert.AreEqual(ts.ComputeTax(asal.GetTaxableSalary(), taxPayer), 
-                stmt.CalculateNetPayableTax(taxPayer));
+            Assert.AreEqual(ts.ComputeTax(asal.GetTaxableSalary(), taxPayer), stmt.CalculateNetPayableTax(taxPayer));
+        }
+
+        [Test]
+        public void MustCalculateNetPayableTaxWithAnnualSalaryAndDeductions()
+        {
+            var taxPayer = new User(0, true, Gender.Female);
+            TaxSlabs ts = TaxSlabs.GetInstance();
+            AnnualSalary asal = new AnnualSalary
+                                   {
+                                       Basic = 600000,
+                                       Hra = 100000
+                                   };
+            TaxStatement stmt = new TaxStatement(asal);
+            DonationsUnder80G donationsUnder80G = new DonationsUnder80G();
+            donationsUnder80G.AddDonation(new FullyExemptDonation(1000));
+            stmt.DonationsUnder80G = donationsUnder80G;
+            Assert.AreEqual(116700.0, stmt.CalculateNetPayableTax(taxPayer),0.01);
         }
         
         [Test]
