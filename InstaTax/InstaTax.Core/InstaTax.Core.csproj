@@ -99,8 +99,9 @@
     <Compile Include="DataAccess\AnnualSalaryRepository.cs" />
     <Compile Include="DataAccess\SampleDataAccess.cs" />
     <Compile Include="DomainObjects\AnnualSalary.cs" />
-    <Compile Include="DomainObjects\Chapter6Investment.cs" />
+    <Compile Include="DomainObjects\Chapter6Investments.cs" />
     <Compile Include="DomainObjects\DuplicateUserException.cs" />
+    <Compile Include="DomainObjects\ITaxExemptable.cs" />
     <Compile Include="DomainObjects\TestClass.cs" />
     <Compile Include="DomainObjects\User.cs" />
     <Compile Include="DomainObjects\Password.cs" />
