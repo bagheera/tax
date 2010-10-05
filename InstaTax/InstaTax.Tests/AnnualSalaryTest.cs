@@ -9,7 +9,7 @@ namespace InstaTax.Tests{
         [Test]
         public void ShouldBeAbleToCheckIfTaxPayeeIsFromMetro(){
             var taxPayer = new User(50000, true, Gender.Male);
-            Assert.True(taxPayer.FromMetro.Value);
+            Assert.True(taxPayer.FromMetro);
         }
 
         [Test]
@@ -63,7 +63,7 @@ namespace InstaTax.Tests{
 
         [Test]
         public void ShouldNotCalculateHraExemptionIfBasicSalaryIsNotAvailable(){
-            var taxPayer = new User(30000, null, Gender.Male);
+            var taxPayer = new User(30000, false, Gender.Male);
             var annualSalary = new AnnualSalary
                                    {
                                        TaxPayer = taxPayer,
@@ -102,19 +102,6 @@ namespace InstaTax.Tests{
             Assert.Throws<Exception>(() => annualSalary.HraExemption());
         }
 
-        [Test]
-        public void ShouldNotCalculateHraExemptionIfUserLocalityStatusIsNotAvailable(){
-            var taxPayer = new User(30000, null, Gender.Male);
-            var annualSalary = new AnnualSalary
-                                   {
-                                       TaxPayer = taxPayer,
-                                       Basic = 100000,
-                                       Hra = 60000,
-                                       ProfessionalTax = 100,
-                                       SpecialAllowance = 10
-                                   };
-            Assert.Throws<Exception>(() => annualSalary.HraExemption());
-        }
 
         [Test]
         public void ShouldReturnFiftyPercentageOfBasicAsHraExemptionWhenItIsMinimumOfAllTaxComponentsAndPayerIsFromMetro
@@ -193,7 +180,7 @@ namespace InstaTax.Tests{
         [Test]
         public void ShouldExemptHousingLoanInterestFromBeingTaxed(){
 
-            var taxPayer = new User(30000, true, Gender.Male){HousingLoanInterestAmount=10000};
+            var taxPayer = new User(30000, true, Gender.Male){HousingLoanInterestAmount=new HousingLoanInterest(10000)};
             var annualSalary = new AnnualSalary
             {
                 TaxPayer = taxPayer,
@@ -204,6 +191,39 @@ namespace InstaTax.Tests{
             };
 
             Assert.AreEqual(8991.0, annualSalary.NetPayableTax(), .01);
+        }
+
+        [TestCase((160000))]
+        [TestCase((150000))]
+        public void ShouldCapHousingLoanInterestExemptionIfAbove1Point5Lac(double testAmount){
+
+            ITaxExemptable housingLoanInterestAmount = new HousingLoanInterest(testAmount);
+            Assert.AreEqual(150000, housingLoanInterestAmount.GetAllowedExemption());
+        }
+
+        [Test]
+        public void ShouldCapHousingLoanInterestExemptionIfBelow1Point5Lac()
+        {
+
+            ITaxExemptable housingLoanInterestAmount = new HousingLoanInterest(10000);
+            Assert.AreEqual(10000, housingLoanInterestAmount.GetAllowedExemption());
+        }
+
+
+    }
+
+    public class HousingLoanInterest : ITaxExemptable{
+
+        private const double Cap = 150000;
+
+        private double Amount { get; set; }
+
+        public HousingLoanInterest(double amount){
+            Amount = amount;
+        }
+
+        public double GetAllowedExemption(){
+            return Amount < Cap ? Amount : Cap;
         }
     }
 }
