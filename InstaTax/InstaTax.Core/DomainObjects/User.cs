@@ -1,5 +1,3 @@
-using System.Text.RegularExpressions;
-
 namespace InstaTax.Core.DomainObjects
 {
     public enum Gender
@@ -12,7 +10,7 @@ namespace InstaTax.Core.DomainObjects
         public virtual double RentPaid { get; set; }
         public virtual bool? FromMetro { get; set; }
         public virtual IUserRepository Repository { get; set; }
-        public virtual string EmailId { get; set; }
+        public virtual EmailAddress EmailAddress { get; set; }
         public virtual Password Password { get; set; }
         public virtual string Id { get; set; }
         public virtual Gender Gender { get; set; }
@@ -28,24 +26,24 @@ namespace InstaTax.Core.DomainObjects
             Gender = gender;
         }
 
-        public User(string emailId, Password password, IUserRepository repository)
+        public User(EmailAddress emailId, Password password, IUserRepository repository)
         {
             Repository = repository;
-            EmailId = emailId;
+            EmailAddress = emailId;
             Password = password;
         }
 
-        public User(string emailId, Password password)
+        public User(EmailAddress emailId, Password password)
         {
-            EmailId = emailId;
+            EmailAddress = emailId;
             Password = password;
         }
 
-        public virtual void Save()
+        public virtual void Register()
         {
-            if (Repository.CheckIfUnique())
+            if (CheckIfUnique())
             {
-                Repository.Save();
+                Repository.Save(this);
             }
             else
             {
@@ -53,15 +51,12 @@ namespace InstaTax.Core.DomainObjects
             }
         }
 
-        public virtual bool IsValidId()
+        private bool CheckIfUnique()
         {
-            const string strRegex = @"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}" +
-                                    @"\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\" +
-                                    @".)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$";
-            var re = new Regex(strRegex);
-            return re.IsMatch(EmailId);
+            return Repository.LoadByEmailId(EmailAddress) == null;
         }
 
+       
         public virtual bool IsFemale()
         {
             return Gender == Gender.Female;

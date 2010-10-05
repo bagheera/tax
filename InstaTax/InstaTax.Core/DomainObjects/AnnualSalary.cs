@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace InstaTax.Core {
+namespace InstaTax.Core.DomainObjects
+{
 
     public class AnnualSalary{
 
@@ -12,7 +13,7 @@ namespace InstaTax.Core {
         public virtual double ProfessionalTax { get; set; }
         public virtual double Epf { get; set; }
 
-        public virtual string SalaryId { get; set; }
+        public virtual string Id { get; set; }
 
         public virtual double CalculateHraExemption(bool? fromMetro, double rentPaid)
         {
@@ -43,7 +44,7 @@ namespace InstaTax.Core {
             return Basic*0.4;
         }
 
-        public double GetTaxableSalary()
+        public virtual double GetTaxableSalary()
         {
             return Basic + Hra + SpecialAllowance;
         }
