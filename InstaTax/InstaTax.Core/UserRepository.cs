@@ -36,5 +36,21 @@ namespace InstaTax.Core
             IList<User> people = query.List<User>();
             return people;
         }
+
+
+        public void SaveAnnualSalary(AnnualSalary salary)
+        {
+            Session.Save(salary);
+        }
+
+        public AnnualSalary GetAnnualSalary(User user)
+        {
+            IQuery query = Session.CreateQuery("from AnnualSalary where userId = '" + user.Id + "'");
+            IList<AnnualSalary> liSalary = query.List<AnnualSalary>();
+            if (liSalary.Count > 0)
+                return liSalary[0];
+
+            return null;
+        }
     }
 }

@@ -94,19 +94,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataAccess\IAnnualSalaryRepository.cs" />
     <Compile Include="DataAccess\NHibernateSetup.cs" />
-    <Compile Include="DataAccess\AnnualSalaryRepository.cs" />
     <Compile Include="DataAccess\SampleDataAccess.cs" />
     <Compile Include="DomainObjects\AnnualSalary.cs" />
     <Compile Include="DomainObjects\Chapter6Investment.cs" />
     <Compile Include="DomainObjects\DonationsUnder80G.cs" />
     <Compile Include="DomainObjects\DonationUnder80G.cs" />
     <Compile Include="DomainObjects\DuplicateUserException.cs" />
+    <Compile Include="OtherIncomeItem.cs" />
+    <Compile Include="DomainObjects\TaxStatement.cs" />
     <Compile Include="DomainObjects\TestClass.cs" />
     <Compile Include="DomainObjects\User.cs" />
     <Compile Include="DomainObjects\Password.cs" />
     <Compile Include="IUserRepository.cs" />
+    <Compile Include="OtherIncomes.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
