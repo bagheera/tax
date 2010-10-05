@@ -8,9 +8,9 @@ namespace InstaTax.Core.DomainObjects
     }
 
     public class User{
-        public virtual double HousingLoanInterestAmount { get; set; }
+        public virtual ITaxExemptable HousingLoanInterestAmount { get; set; }
         public virtual double RentPaid { get; set; }
-        public virtual bool? FromMetro { get; set; }
+        public virtual bool FromMetro { get; set; }
         public virtual IUserRepository Repository { get; set; }
         public virtual string EmailId { get; set; }
         public virtual Password Password { get; set; }
@@ -22,7 +22,7 @@ namespace InstaTax.Core.DomainObjects
 
         }
 
-        public User(double rentPaid, bool? fromMetro, Gender gender){
+        public User(double rentPaid, bool fromMetro, Gender gender){
             RentPaid = rentPaid;
             FromMetro = fromMetro;
             Gender = gender;
