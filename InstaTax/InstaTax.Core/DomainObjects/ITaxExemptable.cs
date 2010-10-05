@@ -1,4 +1,4 @@
-﻿namespace InstaTax.Core.DomainObjects{
+﻿namespace InstaTax.Core{
     public interface ITaxExemptable{
         double GetAllowedExemption();
     }

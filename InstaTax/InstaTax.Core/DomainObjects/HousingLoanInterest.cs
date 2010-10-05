@@ -1,4 +1,6 @@
-﻿namespace InstaTax.Core.DomainObjects{
+﻿using InstaTax.Core;
+
+namespace InstaTax.Tests{
     public class HousingLoanInterest : ITaxExemptable{
 
         private const double Cap = 150000;
