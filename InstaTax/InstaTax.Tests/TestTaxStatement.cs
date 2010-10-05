@@ -78,9 +78,7 @@ namespace InstaTax.Tests
             investments.Add(new LifeInsurance(50000));
             investments.Add(new Elss(60000));
 
-            TaxStatement stmt = new TaxStatement(asal);
-            stmt.OtherIncomes = otherIncomes;
-            stmt.Chapter6Investments = investments;
+            TaxStatement stmt = new TaxStatement(asal) {OtherIncomes = otherIncomes, Chapter6Investments = investments};
 
             double totalIncome = ((asal.GetTaxableSalary() + otherIncomes.CalculateTotalAmount())
                                   -
