@@ -104,13 +104,13 @@
     <Compile Include="DomainObjects\Chapter6Investments.cs" />
     <Compile Include="DomainObjects\HousingLoanInterest.cs" />
     <Compile Include="DomainObjects\ITaxExemptable.cs" />
-    <Compile Include="OtherIncomeItem.cs" />
+    <Compile Include="DomainObjects\OtherIncomeItem.cs" />
+    <Compile Include="DomainObjects\OtherIncomes.cs" />
     <Compile Include="DomainObjects\TaxStatement.cs" />
     <Compile Include="DomainObjects\TestClass.cs" />
     <Compile Include="DomainObjects\User.cs" />
     <Compile Include="DomainObjects\Password.cs" />
     <Compile Include="IUserRepository.cs" />
-    <Compile Include="OtherIncomes.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
