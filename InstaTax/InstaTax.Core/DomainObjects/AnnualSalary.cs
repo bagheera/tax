@@ -15,6 +15,7 @@ namespace InstaTax.Core{
         private readonly TaxSlabs TaxSlabs = TaxSlabs.GetInstance();
         public virtual double Epf { get; set; }
         private Chapter6Investment investments;
+
         public virtual string SalaryId
         {
             get; set;
@@ -61,6 +62,13 @@ namespace InstaTax.Core{
             set { investments = value; }
         }
 
+        private DonationsUnder80G donationsUnder80G = new DonationsUnder80G();
+        public virtual DonationsUnder80G DonationsUnder80G  
+        {
+            protected get { return donationsUnder80G; }
+            set { donationsUnder80G = value ?? new DonationsUnder80G(); }
+        }
+
         public virtual double GetChapter6Deductions(){
             var totalInvestments = Epf;
             if (investments != null){
@@ -72,7 +80,7 @@ namespace InstaTax.Core{
         }
 
         private double TaxableIncome(){
-            return GrossIncome() - HraExemption() - ProfessionalTax - GetChapter6Deductions() - GetHousingLoanInterestAmount();
+            return GrossIncome() - HraExemption() - ProfessionalTax - GetChapter6Deductions() - GetHousingLoanInterestAmount() - DonationsUnder80G.GetDeduction();
         }
 
         private double GetHousingLoanInterestAmount(){

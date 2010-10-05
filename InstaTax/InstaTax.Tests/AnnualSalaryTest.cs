@@ -179,15 +179,19 @@ namespace InstaTax.Tests{
         public void ShouldGetNetPayableTax()
         {
             var taxPayer = new User(30000, true, Gender.Male);
+            var donationsUnder80G = new DonationsUnder80G();
+            donationsUnder80G.AddDonation(new FullyExemptDonation(1000));
             var annualSalary = new AnnualSalary
-            {
-                TaxPayer = taxPayer,
-                Basic = 200000,
-                Hra = 60000,
-                ProfessionalTax = 100,
-                SpecialAllowance = 10
+                                   {
+                                       TaxPayer = taxPayer,
+                                       Basic = 200000,
+                                       Hra = 60000,
+                                       ProfessionalTax = 100,
+                                       SpecialAllowance = 10,
+                                       DonationsUnder80G = donationsUnder80G
+
             };
-            Assert.AreEqual(9991.0, annualSalary.NetPayableTax(),.01);
+            Assert.AreEqual(9891.0, annualSalary.NetPayableTax(),.01);
         }
 
         [Test]
