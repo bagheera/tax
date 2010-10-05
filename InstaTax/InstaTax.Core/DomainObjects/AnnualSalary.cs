@@ -14,7 +14,7 @@ namespace InstaTax.Core{
         public virtual double ProfessionalTax { get; set; }
         private readonly TaxSlabs TaxSlabs = TaxSlabs.GetInstance();
         public virtual double Epf { get; set; }
-        private Chapter6Investment investments;
+        private Chapter6Investments _investmentses;
         public virtual string SalaryId
         {
             get; set;
@@ -43,8 +43,6 @@ namespace InstaTax.Core{
                 throw new Exception("HRA is not set");
             if (TaxPayer == null)
                 throw new Exception("Tax payer information is not set");
-            if (TaxPayer.FromMetro == null)
-                throw new Exception("Locality is not set");
         }
 
         private double AdjustedRentPaidToBasic(){
@@ -52,23 +50,23 @@ namespace InstaTax.Core{
         }
 
         private double PercentageOfBasicBasedOnLocality(){
-            if (TaxPayer.FromMetro.Value)
+            if (TaxPayer.FromMetro)
                 return Basic*0.5;
             return Basic*0.4;
         }
 
-        public virtual Chapter6Investment Investments{
-            set { investments = value; }
+        public virtual Chapter6Investments Investmentses{
+            set { _investmentses = value; }
         }
 
         public virtual double GetChapter6Deductions(){
             var totalInvestments = Epf;
-            if (investments != null){
-                totalInvestments += investments.GetTotal();
+            if (_investmentses != null){
+                totalInvestments += _investmentses.GetTotal();
             }
-            return (totalInvestments <= Chapter6Investment.Cap
+            return (totalInvestments <= Chapter6Investments.Cap
                         ? totalInvestments
-                        : Chapter6Investment.Cap);
+                        : Chapter6Investments.Cap);
         }
 
         private double TaxableIncome(){
@@ -76,7 +74,7 @@ namespace InstaTax.Core{
         }
 
         private double GetHousingLoanInterestAmount(){
-            return TaxPayer.HousingLoanInterestAmount;
+            return TaxPayer.HousingLoanInterestAmount == null ? 0 : TaxPayer.HousingLoanInterestAmount.GetAllowedExemption();
         }
 
         private double GrossIncome(){
