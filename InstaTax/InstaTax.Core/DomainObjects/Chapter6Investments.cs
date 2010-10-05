@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 
 namespace InstaTax.Core{
-    public class Chapter6Investment{
+    public class Chapter6Investments {
         private readonly List<Investment> investments = new List<Investment>();
         public const int Cap = 100000;
 
@@ -16,7 +16,7 @@ namespace InstaTax.Core{
         }
     }
 
-    public class Investment{
+    public class Investment {
         private readonly double amount;
 
         protected Investment(double amount){

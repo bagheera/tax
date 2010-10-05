@@ -15,7 +15,7 @@ namespace InstaTax.Core {
 
         public virtual string SalaryId { get; set; }
 
-        public virtual double CalculateHraExemption(bool? fromMetro, double rentPaid)
+        public virtual double CalculateHraExemption(bool fromMetro, double rentPaid)
         {
             var taxComponents = new List<double>();
             ValidateTaxComponents(fromMetro);
@@ -30,8 +30,6 @@ namespace InstaTax.Core {
                 throw new Exception("Basic Salary is not set");
             if (Hra <= 0)
                 throw new Exception("HRA is not set");
-            if (fromMetro == null)
-                throw new Exception("Locality information is not available");
         }
 
         private double AdjustedRentPaidToBasic(double rentPaid){
@@ -46,8 +44,8 @@ namespace InstaTax.Core {
  
         }
 
-        private double PercentageOfBasicBasedOnLocality(bool? fromMetro){
-            if (fromMetro != null && fromMetro.Value)
+        private double PercentageOfBasicBasedOnLocality(bool fromMetro){
+            if (fromMetro)
                 return Basic*0.5;
             return Basic*0.4;
         }
