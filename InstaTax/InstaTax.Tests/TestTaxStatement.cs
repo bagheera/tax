@@ -22,13 +22,14 @@ namespace InstaTax.Tests
             TaxSlabs ts = TaxSlabs.GetInstance();
             AnnualSalary asal = new AnnualSalary
                                    {
-                                       Basic = 200000.50,
+                                       Basic = 10000.50,
                                        Hra = 1000,
                                        ProfessionalTax = 100,
                                        SpecialAllowance = 10
                                    };
             TaxStatement stmt = new TaxStatement(asal);
-            Assert.AreEqual(1901.05d, stmt.CalculateNetPayableTax(taxPayer),2);
+            Assert.AreEqual(ts.ComputeTax(asal.GetTaxableSalary(), taxPayer), 
+                stmt.CalculateNetPayableTax(taxPayer));
         }
         
         [Test]
@@ -38,7 +39,7 @@ namespace InstaTax.Tests
             TaxSlabs ts = TaxSlabs.GetInstance();
             AnnualSalary asal = new AnnualSalary
                                    {
-                                       Basic = 200000.50,
+                                       Basic = 10000.50,
                                        Hra = 1000,
                                        ProfessionalTax = 100,
                                        SpecialAllowance = 10
@@ -52,8 +53,8 @@ namespace InstaTax.Tests
 
             double totalIncome = asal.GetTaxableSalary() + otherIncomes.CalculateTotalAmount();
 
-            Assert.AreEqual(3101, 
-                stmt.CalculateNetPayableTax(taxPayer),2);
+            Assert.AreEqual(ts.ComputeTax(totalIncome, taxPayer), 
+                stmt.CalculateNetPayableTax(taxPayer));
         }
         
         [Test]
@@ -81,7 +82,8 @@ namespace InstaTax.Tests
 
             double totalIncome = ((asal.GetTaxableSalary() + otherIncomes.CalculateTotalAmount())
                                   -
-                                  (asal.CalculateHraExemption(taxPayer.FromMetro, taxPayer.RentPaid)));
+                                  (asal.CalculateHraExemption(taxPayer.FromMetro, taxPayer.RentPaid) +
+                                   asal.ProfessionalTax));
 
             double totalInvestments = (asal.Epf + investments.GetTotal());
 
@@ -89,8 +91,8 @@ namespace InstaTax.Tests
                  ? totalInvestments
                  : Chapter6Investments.Cap;
 
-            Assert.AreEqual(129803.17, 
-                stmt.CalculateNetPayableTax(taxPayer),2);
+            Assert.AreEqual(ts.ComputeTax(totalIncome, taxPayer), 
+                stmt.CalculateNetPayableTax(taxPayer));
         }
     }
 }
