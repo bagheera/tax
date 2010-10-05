@@ -24,6 +24,7 @@ namespace InstaTax.Core
 
             if (OtherIncomes != null)
                 retAmt += OtherIncomes.CalculateTotalAmount();
+
                 
             retAmt -= (AnnualSalary.CalculateHraExemption(taxPayer.FromMetro, taxPayer.RentPaid));
             
@@ -53,7 +54,7 @@ namespace InstaTax.Core
             double netTaxableIncome = CalculateGrossIncome(taxPayer)
                                       - GetChapter6Deductions();
             
-            return TaxSlabs.GetInstance().ComputeTax(netTaxableIncome, taxPayer)-AnnualSalary.ProfessionalTax;
+            return TaxSlabs.GetInstance().ComputeTax(netTaxableIncome, taxPayer)-(AnnualSalary.ProfessionalTax + AnnualSalary.TaxDedeuctedAtSource);
         }
     }
 }

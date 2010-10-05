@@ -11,8 +11,11 @@ namespace InstaTax.Core {
         public virtual double SpecialAllowance { get; set; }
         public virtual double ProfessionalTax { get; set; }
         public virtual double Epf { get; set; }
+        public virtual double TaxDedeuctedAtSource { get; set; }
 
         public virtual string SalaryId { get; set; }
+
+        
 
         public virtual double CalculateHraExemption(bool fromMetro, double rentPaid)
         {

@@ -154,6 +154,22 @@ namespace InstaTax.Tests{
             Assert.AreEqual(10000, housingLoanInterestAmount.GetAllowedExemption());
         }
 
+        [Test]
+        public void ComputeTaxShouldDeductTDSValueFromTheNetTaxPayableValue()
+        {
+            var taxPayer = new User(50000, true, Gender.Female);
+            TaxSlabs ts = TaxSlabs.GetInstance();
+            AnnualSalary asal = new AnnualSalary
+            {
+                Basic = 200000.50,
+                Hra = 1000,
+                ProfessionalTax = 100,
+                SpecialAllowance = 10,
+                TaxDedeuctedAtSource=1000
+            };
+            TaxStatement stmt = new TaxStatement(asal);
 
+            Assert.AreEqual(901.04,stmt.CalculateNetPayableTax(taxPayer), 2);
+        }
     }
 }
