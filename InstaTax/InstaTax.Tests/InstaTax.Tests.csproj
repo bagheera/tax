@@ -101,6 +101,7 @@
   <ItemGroup>
     <Compile Include="AnnualSalaryTest.cs" />
     <Compile Include="ChapterSixDeductionTest.cs" />
+    <Compile Include="HousingLoanInterest.cs" />
     <Compile Include="OtherIncomeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PasswordTest.cs" />
