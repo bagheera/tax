@@ -101,6 +101,7 @@
     <Compile Include="DomainObjects\DonationUnder80G.cs" />
     <Compile Include="DomainObjects\DuplicateUserException.cs" />
     <Compile Include="DomainObjects\Chapter6Investments.cs" />
+    <Compile Include="DomainObjects\HousingLoanInterest.cs" />
     <Compile Include="DomainObjects\ITaxExemptable.cs" />
     <Compile Include="OtherIncomeItem.cs" />
     <Compile Include="DomainObjects\TaxStatement.cs" />
