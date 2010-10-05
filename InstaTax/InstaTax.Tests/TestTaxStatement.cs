@@ -73,7 +73,7 @@ namespace InstaTax.Tests
             otherIncomes.Add(new OtherIncomeItem("Income from Interest", 4000.0));
             otherIncomes.Add(new OtherIncomeItem("Income from House Rent", 8000.0));
 
-            Chapter6Investment investments = new Chapter6Investment();
+            Chapter6Investments investments = new Chapter6Investments();
             investments.Add(new LifeInsurance(50000));
             investments.Add(new Elss(60000));
 
@@ -87,9 +87,9 @@ namespace InstaTax.Tests
 
             double totalInvestments = (asal.Epf + investments.GetTotal());
 
-            totalIncome -= totalInvestments <= Chapter6Investment.Cap
+            totalIncome -= totalInvestments <= Chapter6Investments.Cap
                  ? totalInvestments
-                 : Chapter6Investment.Cap;
+                 : Chapter6Investments.Cap;
 
             Assert.AreEqual(129803.17, 
                 stmt.CalculateNetPayableTax(taxPayer),2);
