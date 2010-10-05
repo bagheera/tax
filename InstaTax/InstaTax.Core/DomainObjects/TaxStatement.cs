@@ -57,7 +57,7 @@ namespace InstaTax.Core
 
         private double GetHousingLoanInterestAmount(User taxPayer)
         {
-            return taxPayer.HousingLoanInterestAmount == null ? 0 : taxPayer.HousingLoanInterestAmount.GetAllowedExemption();
+            return taxPayer.HousingLoanInterest == null ? 0 : taxPayer.HousingLoanInterest.GetAllowedExemption();
         }
 
         public double CalculateNetPayableTax(User taxPayer)
