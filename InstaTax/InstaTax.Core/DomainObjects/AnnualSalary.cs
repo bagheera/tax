@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using InstaTax.Core.DataAccess;
 
 namespace InstaTax.Core {
 
     public class AnnualSalary{
-
-        public virtual IAnnualSalaryRepository Repository { get; set; }
 
         public virtual double Basic { get; set; }
         public virtual double Hra { get; set; }
