@@ -7,110 +7,110 @@ namespace InstaTax.Tests{
     public class ChapterSixDeductionTest{
         [Test]
         public void ShouldReturnZeroDeductionIfInvestmentIsNotAvailableAndEpfIsZero(){
-            var salary = new AnnualSalary {Investments = null, Epf = 0.0};
+            var salary = new AnnualSalary {Investmentses = null, Epf = 0.0};
             Assert.AreEqual(0.0, salary.GetChapter6Deductions(), 0.01);
 
-            salary = new AnnualSalary {Investments = new Chapter6Investment()};
+            salary = new AnnualSalary {Investmentses = new Chapter6Investments()};
             Assert.AreEqual(0.0, salary.GetChapter6Deductions(), 0.01);
         }
 
         [Test]
         public void ShouldReturnLifeInsuranceInvestmentAsDeductionIfNoOtherInvestmentIsMadeAndEpfIsZero(){
-            var investments = new Chapter6Investment();
+            var investments = new Chapter6Investments();
             investments.Add(new LifeInsurance(30000));
-            var salary = new AnnualSalary {Investments = investments, Epf = 0};
+            var salary = new AnnualSalary {Investmentses = investments, Epf = 0};
             Assert.AreEqual(30000.0, salary.GetChapter6Deductions(), 0.01);
         }
 
         [Test]
         public void ShouldReturnSumOfLifeInsuranceAndElssIfBothAreWithinCapAndOtherInvestmentAreZero(){
-            var investments = new Chapter6Investment();
+            var investments = new Chapter6Investments();
             investments.Add(new LifeInsurance(30000));
             investments.Add(new Elss(60000));
 
-            var salary = new AnnualSalary {Investments = investments, Epf = 0};
+            var salary = new AnnualSalary {Investmentses = investments, Epf = 0};
             Assert.AreEqual(90000.0, salary.GetChapter6Deductions(), 0.01);
         }
 
         [Test]
         public void
             ShouldReturnCapValueAsDeductionIfLifeInsuranceAndElssInvestmentsExceedsTheCapAndOtherInvestmentAreZero(){
-            var investments = new Chapter6Investment();
+            var investments = new Chapter6Investments();
             investments.Add(new LifeInsurance(50000));
             investments.Add(new Elss(60000));
 
-            var salary = new AnnualSalary {Investments = investments, Epf = 0};
-            Assert.AreEqual(Chapter6Investment.Cap, salary.GetChapter6Deductions(), 0.01);
+            var salary = new AnnualSalary {Investmentses = investments, Epf = 0};
+            Assert.AreEqual(Chapter6Investments.Cap, salary.GetChapter6Deductions(), 0.01);
         }
 
         [Test]
         public void ShouldReturnTotalPpfInvestmentAsDeductionIfPpfInvestmentIsWithinPpfCapAndNoOtherInvestmentIsMade(){
-            var investments = new Chapter6Investment();
+            var investments = new Chapter6Investments();
             const double ppfContribution = 69999.99;
             investments.Add(new PublicProvidentFund(ppfContribution));
 
-            var salary = new AnnualSalary {Investments = investments, Epf = 0};
+            var salary = new AnnualSalary {Investmentses = investments, Epf = 0};
             Assert.AreEqual(ppfContribution, salary.GetChapter6Deductions(), 0.01);
         }
 
         [Test]
         public void
             ShouldReturnTotalInvestmentAsDeductionIfLicElssAndPpfInvestmentsAreWithinTheInvestmantCapAndEpfIsZero(){
-            var investments = new Chapter6Investment();
+            var investments = new Chapter6Investments();
             investments.Add(new LifeInsurance(50000.09));
             investments.Add(new Elss(30000));
             investments.Add(new PublicProvidentFund(19999.9));
 
-            var salary = new AnnualSalary {Investments = investments, Epf = 0};
+            var salary = new AnnualSalary {Investmentses = investments, Epf = 0};
             Assert.AreEqual(99999.99, salary.GetChapter6Deductions(), 0.01);
         }
 
         [Test]
         public void ShouldReturnTotalInvestmentCapAsDeductionIfLicElssAndPpfInvestmentsExceedsTheCapAndEpfIsZero(){
-            var investments = new Chapter6Investment();
+            var investments = new Chapter6Investments();
             investments.Add(new LifeInsurance(50000));
             investments.Add(new Elss(30000));
             investments.Add(new PublicProvidentFund(20000.01));
 
-            var salary = new AnnualSalary { Investments = investments, Epf = 0 };
-            Assert.AreEqual(Chapter6Investment.Cap, salary.GetChapter6Deductions(), 0.01);
+            var salary = new AnnualSalary { Investmentses = investments, Epf = 0 };
+            Assert.AreEqual(Chapter6Investments.Cap, salary.GetChapter6Deductions(), 0.01);
         }
 
 
         [Test]
         public void ShouldReturnNoDeductionIfEpfIsNotAvailableAndNoOtherInvestmentIsMade(){
-            var salary = new AnnualSalary {Investments = null, Epf = 0};
+            var salary = new AnnualSalary {Investmentses = null, Epf = 0};
             Assert.AreEqual(0, salary.GetChapter6Deductions(), 0.01);
         }
 
         [Test]
         public void ShouldReturnEpfAsDeductionIfNoOtherInvestmentIsMade(){
             const int epfContribution = 100;
-            var salary = new AnnualSalary {Investments = null, Epf = epfContribution};
+            var salary = new AnnualSalary {Investmentses = null, Epf = epfContribution};
             Assert.AreEqual(epfContribution, salary.GetChapter6Deductions(), 0.01);
         }
 
        [Test]
         public void ShouldReturnTotalInvestmentAsDeductionWhenTotalOfAllInvestmetIsUnderDeductionCap(){
-            var investments = new Chapter6Investment();
+            var investments = new Chapter6Investments();
             investments.Add(new LifeInsurance(50000));
             investments.Add(new Elss(30000));
             investments.Add(new PublicProvidentFund(10000));
 
-            var salary = new AnnualSalary {Investments = investments, Epf = 9999.99};
+            var salary = new AnnualSalary {Investmentses = investments, Epf = 9999.99};
             Assert.AreEqual(99999.99, salary.GetChapter6Deductions(), 0.01);
         }
 
 
         [Test]
         public void ShouldReturnDeductionCapAsDeductionWhenTotalOfAllInvestmetIsAboveDeductionCap(){
-            var investments = new Chapter6Investment();
+            var investments = new Chapter6Investments();
             investments.Add(new LifeInsurance(50000));
             investments.Add(new Elss(30000));
             investments.Add(new PublicProvidentFund(10000));
 
-            var salary = new AnnualSalary {Investments = investments, Epf = 500000};
-            Assert.AreEqual(Chapter6Investment.Cap, salary.GetChapter6Deductions(), 0.01);
+            var salary = new AnnualSalary {Investmentses = investments, Epf = 500000};
+            Assert.AreEqual(Chapter6Investments.Cap, salary.GetChapter6Deductions(), 0.01);
         }
 
 
@@ -122,36 +122,36 @@ namespace InstaTax.Tests{
         [Test]
         public void ShouldReturnDeductionCapAsDeductionWhenOnlyHousingLoanPrincipalAsInvestementWithEpfAsZeroAndExceedsTheCap()
         {
-            var investments = new Chapter6Investment();
+            var investments = new Chapter6Investments();
             investments.Add(new HousingLoanPrincipal(100001));
-            var salary = new AnnualSalary { Investments = investments, Epf = 0 };
-            Assert.AreEqual(Chapter6Investment.Cap, salary.GetChapter6Deductions(), 0.01);
+            var salary = new AnnualSalary { Investmentses = investments, Epf = 0 };
+            Assert.AreEqual(Chapter6Investments.Cap, salary.GetChapter6Deductions(), 0.01);
         }
 
         [Test]
         public void ShouldReturnDeductionCapAsDeductionWhenOnlyHousingLoanPrincipalAsInvestementWithEpfAndExceedsTheCap()
         {
-            var investments = new Chapter6Investment();
+            var investments = new Chapter6Investments();
             investments.Add(new HousingLoanPrincipal(90001));
-            var salary = new AnnualSalary { Investments = investments, Epf = 10000 };
-            Assert.AreEqual(Chapter6Investment.Cap, salary.GetChapter6Deductions(), 0.01);
+            var salary = new AnnualSalary { Investmentses = investments, Epf = 10000 };
+            Assert.AreEqual(Chapter6Investments.Cap, salary.GetChapter6Deductions(), 0.01);
         }
 
         [Test]
         public void ShouldReturnTotalDeductionsAsDeductionWhenOnlyHousingLoanPrincipalAsInvestementWithEpfAndUnderTheCap()
         {
-            var investments = new Chapter6Investment();
+            var investments = new Chapter6Investments();
             investments.Add(new HousingLoanPrincipal(60001));
-            var salary = new AnnualSalary { Investments = investments, Epf = 10000 };
+            var salary = new AnnualSalary { Investmentses = investments, Epf = 10000 };
             Assert.AreEqual(70001, salary.GetChapter6Deductions(), 0.01);
         }
 
         [Test]
         public void ShouldReturnTotalDeductionsAsDeductionWhenOnlyHousingLoanPrincipalAsInvestementWithEpfAsZeroAndUnderTheCap()
         {
-            var investments = new Chapter6Investment();
+            var investments = new Chapter6Investments();
             investments.Add(new HousingLoanPrincipal(60001));
-            var salary = new AnnualSalary { Investments = investments, Epf = 0 };
+            var salary = new AnnualSalary { Investmentses = investments, Epf = 0 };
             Assert.AreEqual(60001, salary.GetChapter6Deductions(), 0.01);
         }
 
