@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using InstaTax.Core.DomainObjects;
 
-namespace InstaTax.Core {
+namespace InstaTax.Core.DomainObjects
+{
 
     public class AnnualSalary{
 
@@ -14,7 +15,7 @@ namespace InstaTax.Core {
         public virtual double Epf { get; set; }
         public virtual double TaxDedeuctedAtSource { get; set; }
 
-        public virtual string SalaryId { get; set; }
+        public virtual string Id { get; set; }
 
         
 
@@ -53,8 +54,7 @@ namespace InstaTax.Core {
             return Basic*0.4;
         }
 
-
-        public double GetTaxableSalary()
+        public virtual double GetTaxableSalary()
         {
             return Basic + Hra + SpecialAllowance;
         }

@@ -1,23 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" auto-import="true" assembly="InstaTax.Core" namespace="InstaTax.Core">
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" auto-import="true" assembly="InstaTax.Core" namespace="InstaTax.Core.DomainObjects">
+  
+  <class name="InstaTax.Core.DomainObjects.User" table="User">
+    <id name="Id">
+      <generator class="native" />
+    </id>
+    <property name="RentPaid" type="Double"/>
+    <property name="FromMetro" />
+    <component name="EmailAddress">
+      <property access="field" name="value" column="EmailAddress"/>
+    </component>
+  </class>
 
-  <!--
-  <class name="InstaTax.Core.AnnualSalary" table="AnnualSalary">
-    <id name="SalaryId">
+  <class name="InstaTax.Core.DomainObjects.AnnualSalary" table="AnnualSalary">
+    <id name="Id">
       <generator class="native" />
     </id>
     <property name="Basic" column="Basic" type="Double"/>
     <property name="ProfessionalTax" column="ProfessionalTax" type="Double"/>
     <property name="Hra" column="HRA" type="Double"/>
     <property name="SpecialAllowance" column="SpecialAllowance" type="Double"/>
-  </class>
-  -->
-  
-  <class name="InstaTax.Core.DomainObjects.User" table="User">
-    <id name="Id">
-      <generator class="native" />
-    </id>
-    <property name="EmailId" type="String" not-null="true" length="20" />
   </class>
   
 </hibernate-mapping>

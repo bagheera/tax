@@ -100,6 +100,7 @@
     <Compile Include="DomainObjects\DonationsUnder80G.cs" />
     <Compile Include="DomainObjects\DonationUnder80G.cs" />
     <Compile Include="DomainObjects\DuplicateUserException.cs" />
+    <Compile Include="DomainObjects\EmailAddress.cs" />
     <Compile Include="DomainObjects\Chapter6Investments.cs" />
     <Compile Include="DomainObjects\HousingLoanInterest.cs" />
     <Compile Include="DomainObjects\ITaxExemptable.cs" />
@@ -126,9 +127,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="DataAccess\InstaTax.hbm.xml">
+    <EmbeddedResource Include="DataAccess\InstaTax.hbm.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </EmbeddedResource>
     <None Include="DataAccess\System.Data.SQLite.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

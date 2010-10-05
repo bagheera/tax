@@ -107,8 +107,9 @@
     <Compile Include="PasswordTest.cs" />
     <Compile Include="Section80GDeductionTest.cs" />
     <Compile Include="TaxSlabsTest.cs" />
+    <Compile Include="TestEmailAddress.cs" />
     <Compile Include="TestTaxStatement.cs" />
-    <Compile Include="UserPersistenceTest.cs" />
+    <Compile Include="TestUserRepository.cs" />
     <Compile Include="UserRegistrationTests.cs" />
   </ItemGroup>
   <ItemGroup>

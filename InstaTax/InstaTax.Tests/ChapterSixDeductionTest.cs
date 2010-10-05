@@ -1,5 +1,6 @@
 ﻿using System;
 using InstaTax.Core;
+using InstaTax.Core.DomainObjects;
 using NUnit.Framework;
 
 namespace InstaTax.Tests{

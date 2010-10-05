@@ -165,11 +165,11 @@ namespace InstaTax.Tests{
                 Hra = 1000,
                 ProfessionalTax = 100,
                 SpecialAllowance = 10,
-                TaxDedeuctedAtSource=1000
+                TaxDedeuctedAtSource = 1000
             };
             TaxStatement stmt = new TaxStatement(asal);
 
-            Assert.AreEqual(901.04,stmt.CalculateNetPayableTax(taxPayer), 2);
+            Assert.AreEqual(891.04,stmt.CalculateNetPayableTax(taxPayer), 2);
         }
     }
 }

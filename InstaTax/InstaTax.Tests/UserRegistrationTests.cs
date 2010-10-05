@@ -10,34 +10,31 @@ namespace InstaTax.Tests{
         [Test]
         public void ShouldRegisterUserIfUnique(){
             var repository = new Mock<IUserRepository>();
+
             var password = new Password {PasswordString = "abc"};
-            var user = new User("a@a.com", password, repository.Object);
-            repository.Setup(rep => rep.Save());
-            repository.Setup(rep => rep.CheckIfUnique()).Returns(true);
-            user.Save();
+            var user = new User(new EmailAddress("a@a.com"), password, repository.Object);
+
+            repository.Setup(rep => rep.LoadByEmailId(user.EmailAddress)).Returns(() => (User) null);
+            repository.Setup(rep => rep.Save(user));
+            
+            user.Register();
+
+            repository.VerifyAll();
         }
 
         [Test]
         public void ShouldNotRegisterUserIfNotUnique(){
             var repository = new Mock<IUserRepository>();
+
             var password = new Password {PasswordString = "abc"};
-            var user = new User("a@a.com", password, repository.Object);
-            repository.Setup(rep => rep.CheckIfUnique()).Returns(false);
-            Assert.Throws<DuplicateUserException>(user.Save);
+            var user = new User(new EmailAddress("a@a.com"), password, repository.Object);
+
+            repository.Setup(rep => rep.LoadByEmailId(user.EmailAddress)).Returns(user);
+
+            Assert.Throws<DuplicateUserException>(user.Register);
         }
 
-        [Test]
-        public void ShouldValidateUserId()
-        {
-            var repository = new Mock<IUserRepository>();
-            var password = new Password {PasswordString = "abc"};
-            const string validUserId = "a@a.com";
-            const string invalidUserId = "aaa";
-            var user = new User(validUserId, password, repository.Object);
-            Assert.IsTrue(user.IsValidId());
-            user = new User(invalidUserId, password, repository.Object);
-            Assert.IsFalse(user.IsValidId());
-        }
+        
 
     }
 

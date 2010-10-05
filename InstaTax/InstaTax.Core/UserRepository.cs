@@ -7,36 +7,22 @@ namespace InstaTax.Core
 {
     public class UserRepository : NHibernateSetup, IUserRepository
     {
-        public User User { get; set; }
-
-        public UserRepository(User user)
+        public UserRepository()
         {
-            User = user;
         }
 
-        public bool CheckIfUnique()
+        public void Save(User u)
         {
-            return LoadByEmailId().Count == 0;
+            Session.Save(u);
         }
 
-        public bool Save()
+        public User LoadByEmailId(EmailAddress emailAddress)
         {
-            if(CheckIfUnique())
-            {
-                Session.Save(User);
-                return true;
-            }
-            return false;
-        }
+            IQuery query = Session.CreateQuery("from User u WHERE u.EmailAddress = :emailAddress");
+            query.SetParameter("emailAddress", emailAddress.ToString());
 
-        public IList<User> LoadByEmailId()
-        {
-            IQuery query = Session.CreateQuery("from User");
-            Console.WriteLine("query created");
-            IList<User> people = query.List<User>();
-            return people;
+            return query.UniqueResult<User>();
         }
-
 
         public void SaveAnnualSalary(AnnualSalary salary)
         {
@@ -46,7 +32,9 @@ namespace InstaTax.Core
         public AnnualSalary GetAnnualSalary(User user)
         {
             IQuery query = Session.CreateQuery("from AnnualSalary where userId = '" + user.Id + "'");
+            
             IList<AnnualSalary> liSalary = query.List<AnnualSalary>();
+
             if (liSalary.Count > 0)
                 return liSalary[0];
 
