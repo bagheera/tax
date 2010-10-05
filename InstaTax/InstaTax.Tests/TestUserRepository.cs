@@ -32,7 +32,7 @@ namespace InstaTax.Tests
             Assert.IsNotNull(actualUser);
             Assert.AreEqual(email, actualUser.EmailAddress);
             Assert.AreEqual(user.FromMetro, actualUser.FromMetro);
-            Assert.AreEqual(user.HousingLoanInterestAmount, actualUser.HousingLoanInterestAmount);
+            Assert.AreEqual(user.HousingLoanInterest, actualUser.HousingLoanInterest);
             Assert.AreEqual(user.RentPaid, actualUser.RentPaid);
         }
     }
