@@ -131,5 +131,56 @@ namespace InstaTax.Tests{
             Assert.Throws<ArgumentException>(() => new PublicProvidentFund(70000.01));
         }
 
+        [Test]
+        public void ShouldReturnDeductionCapAsDeductionWhenOnlyHousingLoanPrincipalAsInvestementWithEpfAsZeroAndExceedsTheCap()
+        {
+            var investments = new Chapter6Investment();
+            investments.Add(new HousingLoanPrincipal(100001));
+
+            var salary = new AnnualSalary { Epf = 0 };
+
+            TaxStatement ts = new TaxStatement(salary) { Chapter6Investments = investments };
+
+            Assert.AreEqual(Chapter6Investment.Cap, ts.GetChapter6Deductions(), 0.01);
+        }
+
+        [Test]
+        public void ShouldReturnDeductionCapAsDeductionWhenOnlyHousingLoanPrincipalAsInvestementWithEpfAndExceedsTheCap()
+        {
+            var investments = new Chapter6Investment();
+            investments.Add(new HousingLoanPrincipal(90001));
+            var salary = new AnnualSalary { Epf = 10000 };
+
+            TaxStatement ts = new TaxStatement(salary) { Chapter6Investments = investments };
+
+            Assert.AreEqual(Chapter6Investment.Cap, ts.GetChapter6Deductions(), 0.01);
+        }
+
+        [Test]
+        public void ShouldReturnTotalDeductionsAsDeductionWhenOnlyHousingLoanPrincipalAsInvestementWithEpfAndUnderTheCap()
+        {
+            var investments = new Chapter6Investment();
+            investments.Add(new HousingLoanPrincipal(60001));
+            var salary = new AnnualSalary { Epf = 10000 };
+
+            TaxStatement ts = new TaxStatement(salary) { Chapter6Investments = investments };
+
+            Assert.AreEqual(70001, ts.GetChapter6Deductions(), 0.01);
+        }
+
+        [Test]
+        public void ShouldReturnTotalDeductionsAsDeductionWhenOnlyHousingLoanPrincipalAsInvestementWithEpfAsZeroAndUnderTheCap()
+        {
+            var investments = new Chapter6Investment();
+            investments.Add(new HousingLoanPrincipal(60001));
+            var salary = new AnnualSalary { Epf = 0 };
+
+            TaxStatement ts = new TaxStatement(salary) { Chapter6Investments = investments };
+
+            Assert.AreEqual(60001, ts.GetChapter6Deductions(), 0.01);
+        }
+
     }
+
+    
 }

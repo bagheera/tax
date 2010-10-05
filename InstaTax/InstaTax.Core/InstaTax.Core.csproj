@@ -98,8 +98,10 @@
     <Compile Include="DataAccess\SampleDataAccess.cs" />
     <Compile Include="DomainObjects\AnnualSalary.cs" />
     <Compile Include="DomainObjects\Chapter6Investment.cs" />
+    <Compile Include="DomainObjects\DonationsUnder80G.cs" />
+    <Compile Include="DomainObjects\DonationUnder80G.cs" />
     <Compile Include="DomainObjects\DuplicateUserException.cs" />
-    <Compile Include="DomainObjects\OtherIncomeItem.cs" />
+    <Compile Include="OtherIncomeItem.cs" />
     <Compile Include="DomainObjects\TaxStatement.cs" />
     <Compile Include="DomainObjects\TestClass.cs" />
     <Compile Include="DomainObjects\User.cs" />

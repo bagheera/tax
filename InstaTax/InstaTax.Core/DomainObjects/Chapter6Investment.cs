@@ -51,4 +51,13 @@ namespace InstaTax.Core{
             return base.GetAmount() <= Cap ? base.GetAmount() : Cap;
         }
     }
+
+    public class HousingLoanPrincipal : Investment
+    {
+        public HousingLoanPrincipal(double amount)
+            : base(amount)
+        {
+            
+        }
+    }
 }

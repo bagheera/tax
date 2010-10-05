@@ -20,6 +20,8 @@ namespace InstaTax.Core
         {
             double retAmt = AnnualSalary.GetTaxableSalary();
 
+            retAmt -= taxPayer.HousingLoanInterestAmount;
+
             if (OtherIncomes != null)
                 retAmt += OtherIncomes.CalculateTotalAmount();
                 

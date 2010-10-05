@@ -150,19 +150,5 @@ namespace InstaTax.Tests{
             Assert.AreEqual(20000, annualSalary.CalculateHraExemption(taxPayer.FromMetro, taxPayer.RentPaid));
         }
 
-        //[Test]
-        //public void ShouldGetNetPayableTax()
-        //{
-        //    var taxPayer = new User(30000, true, Gender.Male);
-        //    var annualSalary = new AnnualSalary
-        //    {
-        //        Basic = 200000,
-        //        Hra = 60000,
-        //        ProfessionalTax = 100,
-        //        SpecialAllowance = 10
-        //    };
-        //    Assert.AreEqual(9991.0, annualSalary.NetPayableTax(),.01);
-        //}
-
     }
 }
