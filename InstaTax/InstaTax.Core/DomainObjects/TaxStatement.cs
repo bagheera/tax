@@ -11,6 +11,14 @@ namespace InstaTax.Core
 
         public Chapter6Investments Chapter6Investments { get; set; }
 
+        private DonationsUnder80G donationsUnder80G = new DonationsUnder80G();
+        public virtual DonationsUnder80G DonationsUnder80G
+        {
+            protected get { return donationsUnder80G; }
+            set { donationsUnder80G = value ?? new DonationsUnder80G(); }
+        }
+
+
         public TaxStatement(AnnualSalary annualSalary)
         {
             AnnualSalary = annualSalary;
@@ -26,7 +34,10 @@ namespace InstaTax.Core
                 retAmt += OtherIncomes.CalculateTotalAmount();
 
                 
-            retAmt -= (AnnualSalary.CalculateHraExemption(taxPayer.FromMetro, taxPayer.RentPaid));
+            retAmt -= (AnnualSalary.CalculateHraExemption(taxPayer.FromMetro, taxPayer.RentPaid) +
+                AnnualSalary.ProfessionalTax);
+
+            retAmt -= DonationsUnder80G.GetDeduction();
             
             return retAmt;
         }

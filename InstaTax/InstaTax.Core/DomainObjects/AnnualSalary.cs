@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using InstaTax.Core.DomainObjects;
 
 namespace InstaTax.Core {
 
@@ -35,7 +36,15 @@ namespace InstaTax.Core {
         }
 
         private double AdjustedRentPaidToBasic(double rentPaid){
-            return rentPaid - Basic * 0.1;
+            if (rentPaid > (Basic * 0.1))
+            {
+                return rentPaid - Basic * 0.1;               
+            }
+            else
+            {
+                return rentPaid;
+            }
+ 
         }
 
         private double PercentageOfBasicBasedOnLocality(bool fromMetro){
@@ -44,7 +53,6 @@ namespace InstaTax.Core {
             return Basic*0.4;
         }
 
- 
 
         public double GetTaxableSalary()
         {
