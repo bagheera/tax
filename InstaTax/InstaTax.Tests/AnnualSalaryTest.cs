@@ -9,7 +9,7 @@ namespace InstaTax.Tests{
         [Test]
         public void ShouldBeAbleToCheckIfTaxPayeeIsFromMetro(){
             var taxPayer = new User(50000, true, Gender.Male);
-            Assert.True(taxPayer.FromMetro.Value);
+            Assert.True(taxPayer.FromMetro);
         }
 
         [Test]
@@ -58,7 +58,7 @@ namespace InstaTax.Tests{
 
         [Test]
         public void ShouldNotCalculateHraExemptionIfBasicSalaryIsNotAvailable(){
-            var taxPayer = new User(30000, null, Gender.Male);
+            var taxPayer = new User(30000, false, Gender.Male);
             var annualSalary = new AnnualSalary
                                    {
                                        Basic = 0,
@@ -80,19 +80,6 @@ namespace InstaTax.Tests{
                                        SpecialAllowance = 10
                                    };
             Assert.Throws<Exception>(() => annualSalary.CalculateHraExemption(taxPayer.FromMetro, taxPayer.RentPaid));
-        }
-
-        [Test]
-        public void ShouldNotCalculateHraExemptionIfUserLocalityStatusIsNotAvailable(){
-            var taxPayer = new User(30000, null, Gender.Male);
-            var annualSalary = new AnnualSalary
-                                   {
-                                       Basic = 100000,
-                                       Hra = 60000,
-                                       ProfessionalTax = 100,
-                                       SpecialAllowance = 10
-                                   };
-            Assert.Throws<Exception>(() => annualSalary.CalculateHraExemption(null, taxPayer.RentPaid));
         }
 
         [Test]
@@ -150,5 +137,39 @@ namespace InstaTax.Tests{
             Assert.AreEqual(20000, annualSalary.CalculateHraExemption(taxPayer.FromMetro, taxPayer.RentPaid));
         }
 
+
+        [TestCase((160000))]
+        [TestCase((150000))]
+        public void ShouldCapHousingLoanInterestExemptionIfAbove1Point5Lac(double testAmount){
+
+            ITaxExemptable housingLoanInterestAmount = new HousingLoanInterest(testAmount);
+            Assert.AreEqual(150000, housingLoanInterestAmount.GetAllowedExemption());
+        }
+
+        [Test]
+        public void ShouldCapHousingLoanInterestExemptionIfBelow1Point5Lac()
+        {
+
+            ITaxExemptable housingLoanInterestAmount = new HousingLoanInterest(10000);
+            Assert.AreEqual(10000, housingLoanInterestAmount.GetAllowedExemption());
+        }
+
+        [Test]
+        public void ComputeTaxShouldDeductTDSValueFromTheNetTaxPayableValue()
+        {
+            var taxPayer = new User(50000, true, Gender.Female);
+            TaxSlabs ts = TaxSlabs.GetInstance();
+            AnnualSalary asal = new AnnualSalary
+            {
+                Basic = 200000.50,
+                Hra = 1000,
+                ProfessionalTax = 100,
+                SpecialAllowance = 10,
+                TaxDedeuctedAtSource = 1000
+            };
+            TaxStatement stmt = new TaxStatement(asal);
+
+            Assert.AreEqual(891.04,stmt.CalculateNetPayableTax(taxPayer), 2);
+        }
     }
 }

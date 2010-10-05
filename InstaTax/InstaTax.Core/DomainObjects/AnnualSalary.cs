@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using InstaTax.Core.DomainObjects;
 
 namespace InstaTax.Core.DomainObjects
 {
@@ -12,10 +13,13 @@ namespace InstaTax.Core.DomainObjects
         public virtual double SpecialAllowance { get; set; }
         public virtual double ProfessionalTax { get; set; }
         public virtual double Epf { get; set; }
+        public virtual double TaxDedeuctedAtSource { get; set; }
 
         public virtual string Id { get; set; }
 
-        public virtual double CalculateHraExemption(bool? fromMetro, double rentPaid)
+        
+
+        public virtual double CalculateHraExemption(bool fromMetro, double rentPaid)
         {
             var taxComponents = new List<double>();
             ValidateTaxComponents(fromMetro);
@@ -30,16 +34,22 @@ namespace InstaTax.Core.DomainObjects
                 throw new Exception("Basic Salary is not set");
             if (Hra <= 0)
                 throw new Exception("HRA is not set");
-            if (fromMetro == null)
-                throw new Exception("Locality information is not available");
         }
 
         private double AdjustedRentPaidToBasic(double rentPaid){
-            return rentPaid - Basic * 0.1;
+            if (rentPaid > (Basic * 0.1))
+            {
+                return rentPaid - Basic * 0.1;               
+            }
+            else
+            {
+                return rentPaid;
+            }
+ 
         }
 
-        private double PercentageOfBasicBasedOnLocality(bool? fromMetro){
-            if (fromMetro != null && fromMetro.Value)
+        private double PercentageOfBasicBasedOnLocality(bool fromMetro){
+            if (fromMetro)
                 return Basic*0.5;
             return Basic*0.4;
         }

@@ -21,7 +21,6 @@ namespace InstaTax.Tests
             var user = new User(email, password);
 
             user.FromMetro = true;
-            user.HousingLoanInterestAmount = 8100.0;
             user.RentPaid = 8000.00;
             
             user.Repository = repository;

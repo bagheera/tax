@@ -5,7 +5,6 @@
     <id name="Id">
       <generator class="native" />
     </id>
-    <property name="HousingLoanInterestAmount" type="Double" length="20"/>
     <property name="RentPaid" type="Double"/>
     <property name="FromMetro" />
     <component name="EmailAddress">
