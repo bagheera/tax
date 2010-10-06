@@ -15,7 +15,7 @@ namespace InstaTax.Tests.Functional
         public void MustCalculateNetPayableTaxWithAnnualSalaryOtherIncomesAndChapter6Investments()
         {
             var taxPayer = new User(50000, true, Gender.Female);
-            taxPayer.HousingLoanInterest = new HousingLoanInterest(10000);
+           
 
             TaxSlabs ts = TaxSlabs.GetInstance();
             AnnualSalary asal = new AnnualSalary
@@ -34,12 +34,13 @@ namespace InstaTax.Tests.Functional
             investments.Add(new LifeInsurance(50000));
             investments.Add(new Elss(60000));
 
-            TaxStatement stmt = new TaxStatement(asal);
+            TaxStatement stmt = new TaxStatement(asal, taxPayer);
+            stmt.HousingLoanInterest = new HousingLoanInterest(10000);
             stmt.OtherIncomes = otherIncomes;
             stmt.Chapter6Investments = investments;
 
             Assert.AreEqual(120473,
-                stmt.CalculateNetPayableTax(taxPayer), 2);
+                stmt.CalculateNetPayableTax(), 2);
         }
     }
 }

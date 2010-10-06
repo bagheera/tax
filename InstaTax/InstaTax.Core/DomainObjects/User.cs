@@ -6,7 +6,7 @@ namespace InstaTax.Core.DomainObjects
     }
 
     public class User{
-        public virtual ITaxExemptable HousingLoanInterest { get; set; }
+        
         public virtual double RentPaid { get; set; }
         public virtual bool FromMetro { get; set; }
         public virtual IRepository Repository { get; set; }

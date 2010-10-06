@@ -32,7 +32,6 @@ namespace InstaTax.Tests
             Assert.IsNotNull(actualUser);
             Assert.AreEqual(email, actualUser.EmailAddress);
             Assert.AreEqual(user.FromMetro, actualUser.FromMetro);
-            Assert.AreEqual(user.HousingLoanInterest, actualUser.HousingLoanInterest);
             Assert.AreEqual(user.RentPaid, actualUser.RentPaid);
         }
         
@@ -42,7 +41,7 @@ namespace InstaTax.Tests
             IRepository repository = new Repository();
 
             AnnualSalary salary = new AnnualSalary() { Basic = 10000, Epf = 2000, Hra = 6000, Id = "salary", ProfessionalTax = 200, SpecialAllowance = 5000, TaxDedeuctedAtSource = 5000};
-            TaxStatement taxStatement = new TaxStatement(salary);
+            TaxStatement taxStatement = new TaxStatement(salary, null);
 
             DonationsUnder80G donationsUnder80G = new DonationsUnder80G();
             donationsUnder80G.AddDonation(new HalfExemptDonation(20000));
