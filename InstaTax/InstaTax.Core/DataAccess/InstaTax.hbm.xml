@@ -15,11 +15,19 @@
   <class name="InstaTax.Core.DomainObjects.AnnualSalary" table="AnnualSalary">
     <id name="Id">
       <generator class="native" />
-    </id>
+    </id>    
     <property name="Basic" column="Basic" type="Double"/>
     <property name="ProfessionalTax" column="ProfessionalTax" type="Double"/>
     <property name="Hra" column="HRA" type="Double"/>
     <property name="SpecialAllowance" column="SpecialAllowance" type="Double"/>
+  </class>
+
+  <class name="InstaTax.Core.DomainObjects.TaxStatement" table="TaxStatement">
+    <id name="Id">
+      <generator class="native" />
+    </id>
+    <one-to-one name="AnnualSalary" foreign-key="Annual_Salary_Id"  />
+    
   </class>
   
 </hibernate-mapping>

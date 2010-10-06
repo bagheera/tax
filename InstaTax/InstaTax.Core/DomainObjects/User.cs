@@ -9,7 +9,7 @@ namespace InstaTax.Core.DomainObjects
         public virtual ITaxExemptable HousingLoanInterest { get; set; }
         public virtual double RentPaid { get; set; }
         public virtual bool FromMetro { get; set; }
-        public virtual IUserRepository Repository { get; set; }
+        public virtual IRepository Repository { get; set; }
         public virtual EmailAddress EmailAddress { get; set; }
         public virtual Password Password { get; set; }
         public virtual string Id { get; set; }
@@ -26,7 +26,7 @@ namespace InstaTax.Core.DomainObjects
             Gender = gender;
         }
 
-        public User(EmailAddress emailId, Password password, IUserRepository repository)
+        public User(EmailAddress emailId, Password password, IRepository repository)
         {
             Repository = repository;
             EmailAddress = emailId;

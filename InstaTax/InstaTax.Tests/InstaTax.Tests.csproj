@@ -109,7 +109,7 @@
     <Compile Include="TaxSlabsTest.cs" />
     <Compile Include="TestEmailAddress.cs" />
     <Compile Include="TestTaxStatement.cs" />
-    <Compile Include="TestUserRepository.cs" />
+    <Compile Include="TestRepository.cs" />
     <Compile Include="UserRegistrationTests.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -2,12 +2,13 @@ using System;
 using System.Collections.Generic;
 using InstaTax.Core.DomainObjects;
 using NHibernate;
+using System.Linq;
 
 namespace InstaTax.Core
 {
-    public class UserRepository : NHibernateSetup, IUserRepository
+    public class Repository : NHibernateSetup, IRepository
     {
-        public UserRepository()
+        public Repository()
         {
         }
 
@@ -16,12 +17,21 @@ namespace InstaTax.Core
             Session.Save(u);
         }
 
+        public void Save(TaxStatement taxStatement){
+            Session.Save(taxStatement);
+        }
+
         public User LoadByEmailId(EmailAddress emailAddress)
         {
             IQuery query = Session.CreateQuery("from User u WHERE u.EmailAddress = :emailAddress");
             query.SetParameter("emailAddress", emailAddress.ToString());
 
             return query.UniqueResult<User>();
+        }
+
+        public List<T> LoadAll<T>(){
+            IList<T> list = Session.CreateCriteria(typeof(T)).List<T>();
+            return list.ToList();
         }
 
         public void SaveAnnualSalary(AnnualSalary salary)
@@ -40,5 +50,7 @@ namespace InstaTax.Core
 
             return null;
         }
+
+        
     }
 }
