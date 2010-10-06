@@ -5,6 +5,9 @@ namespace InstaTax.Core
 {
     public class TaxStatement
     {
+
+        public virtual ITaxExemptable HousingLoanInterest { get; set; }
+        
         public AnnualSalary AnnualSalary { get; set; }
 
         public OtherIncomes OtherIncomes { get; set; }
@@ -12,6 +15,9 @@ namespace InstaTax.Core
         public Chapter6Investments Chapter6Investments { get; set; }
 
         private DonationsUnder80G donationsUnder80G = new DonationsUnder80G();
+
+        private User TaxPayer { get; set; }
+
         public virtual DonationsUnder80G DonationsUnder80G
         {
             protected get { return donationsUnder80G; }
@@ -19,16 +25,19 @@ namespace InstaTax.Core
         }
 
 
-        public TaxStatement(AnnualSalary annualSalary)
+
+
+        public TaxStatement(AnnualSalary annualSalary, User taxPayer)
         {
             AnnualSalary = annualSalary;
+            TaxPayer = taxPayer;
         }
 
         private double CalculateGrossIncome(User taxPayer)
         {
             double retAmt = AnnualSalary.GetTaxableSalary();
 
-            retAmt -= GetHousingLoanInterestAmount(taxPayer);
+            retAmt -= GetHousingLoanInterestAmount();
 
             if (OtherIncomes != null)
                 retAmt += OtherIncomes.CalculateTotalAmount();
@@ -55,17 +64,17 @@ namespace InstaTax.Core
                         : Chapter6Investments.Cap);
         }
 
-        private double GetHousingLoanInterestAmount(User taxPayer)
+        private double GetHousingLoanInterestAmount()
         {
-            return taxPayer.HousingLoanInterest == null ? 0 : taxPayer.HousingLoanInterest.GetAllowedExemption();
+            return HousingLoanInterest == null ? 0 : HousingLoanInterest.GetAllowedExemption();
         }
 
-        public double CalculateNetPayableTax(User taxPayer)
+        public double CalculateNetPayableTax()
         {
-            double netTaxableIncome = CalculateGrossIncome(taxPayer)
+            double netTaxableIncome = CalculateGrossIncome(TaxPayer)
                                       - GetChapter6Deductions();
             
-            return TaxSlabs.GetInstance().ComputeTax(netTaxableIncome, taxPayer)-(AnnualSalary.ProfessionalTax + AnnualSalary.TaxDedeuctedAtSource);
+            return TaxSlabs.GetInstance().ComputeTax(netTaxableIncome, TaxPayer)-(AnnualSalary.ProfessionalTax + AnnualSalary.TaxDedeuctedAtSource);
         }
     }
 }

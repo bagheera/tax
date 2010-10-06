@@ -167,9 +167,9 @@ namespace InstaTax.Tests{
                 SpecialAllowance = 10,
                 TaxDedeuctedAtSource = 1000
             };
-            TaxStatement stmt = new TaxStatement(asal);
+            TaxStatement stmt = new TaxStatement(asal, taxPayer);
 
-            Assert.AreEqual(891.04,stmt.CalculateNetPayableTax(taxPayer), 2);
+            Assert.AreEqual(891.04,stmt.CalculateNetPayableTax(), 2);
         }
     }
 }
