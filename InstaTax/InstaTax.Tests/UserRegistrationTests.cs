@@ -9,7 +9,7 @@ namespace InstaTax.Tests{
     {
         [Test]
         public void ShouldRegisterUserIfUnique(){
-            var repository = new Mock<IUserRepository>();
+            var repository = new Mock<IRepository>();
 
             var password = new Password {PasswordString = "abc"};
             var user = new User(new EmailAddress("a@a.com"), password, repository.Object);
@@ -24,7 +24,7 @@ namespace InstaTax.Tests{
 
         [Test]
         public void ShouldNotRegisterUserIfNotUnique(){
-            var repository = new Mock<IUserRepository>();
+            var repository = new Mock<IRepository>();
 
             var password = new Password {PasswordString = "abc"};
             var user = new User(new EmailAddress("a@a.com"), password, repository.Object);

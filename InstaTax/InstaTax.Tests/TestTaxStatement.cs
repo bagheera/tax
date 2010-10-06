@@ -11,7 +11,7 @@ namespace InstaTax.Tests
         public void MustHaveAnAnnualSalary()
         {
             AnnualSalary asal  = new AnnualSalary();
-            TaxStatement stmt = new TaxStatement(asal);
+            TaxStatement stmt = new TaxStatement(asal,null);
             Assert.AreSame(asal, stmt.AnnualSalary);
         } 
 
@@ -27,8 +27,8 @@ namespace InstaTax.Tests
                                        ProfessionalTax = 100,
                                        SpecialAllowance = 10
                                    };
-            TaxStatement stmt = new TaxStatement(asal);
-            Assert.AreEqual(1891.05d, stmt.CalculateNetPayableTax(taxPayer));
+            TaxStatement stmt = new TaxStatement(asal,taxPayer);
+            Assert.AreEqual(1891.05d, stmt.CalculateNetPayableTax());
         }
 
         [Test]
@@ -41,11 +41,11 @@ namespace InstaTax.Tests
                                        Basic = 600000,
                                        Hra = 100000
                                    };
-            TaxStatement stmt = new TaxStatement(asal);
+            TaxStatement stmt = new TaxStatement(asal,taxPayer);
             DonationsUnder80G donationsUnder80G = new DonationsUnder80G();
             donationsUnder80G.AddDonation(new FullyExemptDonation(1000));
             stmt.DonationsUnder80G = donationsUnder80G;
-            Assert.AreEqual(116700.0, stmt.CalculateNetPayableTax(taxPayer),0.01);
+            Assert.AreEqual(116700.0, stmt.CalculateNetPayableTax(),0.01);
 
         }
         
@@ -61,7 +61,7 @@ namespace InstaTax.Tests
                                        ProfessionalTax = 100,
                                        SpecialAllowance = 10
                                    };
-            TaxStatement stmt = new TaxStatement(asal);
+            TaxStatement stmt = new TaxStatement(asal,taxPayer);
             
             OtherIncomes otherIncomes = new OtherIncomes();
             otherIncomes.Add(new OtherIncomeItem("Income from Interest", 4000.0));
@@ -71,7 +71,7 @@ namespace InstaTax.Tests
             double totalIncome = asal.GetTaxableSalary() + otherIncomes.CalculateTotalAmount();
 
             Assert.AreEqual(3091, 
-                stmt.CalculateNetPayableTax(taxPayer),2);
+                stmt.CalculateNetPayableTax(),2);
         }
         
         [Test]
@@ -95,7 +95,7 @@ namespace InstaTax.Tests
             investments.Add(new LifeInsurance(50000));
             investments.Add(new Elss(60000));
 
-            TaxStatement stmt = new TaxStatement(asal);
+            TaxStatement stmt = new TaxStatement(asal,taxPayer);
             stmt.OtherIncomes = otherIncomes;
             stmt.Chapter6Investments = investments;
 
@@ -110,7 +110,7 @@ namespace InstaTax.Tests
                  : Chapter6Investments.Cap;
 
             Assert.AreEqual(120473, 
-                stmt.CalculateNetPayableTax(taxPayer),2);
+                stmt.CalculateNetPayableTax(),2);
         }
     }
 }

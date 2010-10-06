@@ -9,11 +9,11 @@ namespace InstaTax.Tests{
         [Test]
         public void ShouldReturnZeroDeductionIfInvestmentIsNotAvailableAndEpfIsZero(){
             var salary = new AnnualSalary {Epf = 0.0};
-            TaxStatement ts = new TaxStatement(salary);
+            TaxStatement ts = new TaxStatement(salary, null);
             Assert.AreEqual(0.0, ts.GetChapter6Deductions(), 0.01);
 
             salary = new AnnualSalary();
-            ts = new TaxStatement(salary) { Chapter6Investments = new Chapter6Investments() };
+            ts = new TaxStatement(salary, null) { Chapter6Investments = new Chapter6Investments() };
             Assert.AreEqual(0.0, ts.GetChapter6Deductions(), 0.01);
         }
 
@@ -22,7 +22,7 @@ namespace InstaTax.Tests{
             var investments = new Chapter6Investments();
             investments.Add(new LifeInsurance(30000));
             var salary = new AnnualSalary {Epf = 0};
-            TaxStatement ts = new TaxStatement(salary) { Chapter6Investments = investments };
+            TaxStatement ts = new TaxStatement(salary, null) { Chapter6Investments = investments };
             Assert.AreEqual(30000.0, ts.GetChapter6Deductions(), 0.01);
         }
 
@@ -33,7 +33,7 @@ namespace InstaTax.Tests{
             investments.Add(new Elss(60000));
 
             var salary = new AnnualSalary {Epf = 0};
-            TaxStatement ts = new TaxStatement(salary) { Chapter6Investments = investments };
+            TaxStatement ts = new TaxStatement(salary, null) { Chapter6Investments = investments };
             Assert.AreEqual(90000.0, ts.GetChapter6Deductions(), 0.01);
         }
 
@@ -45,7 +45,7 @@ namespace InstaTax.Tests{
             investments.Add(new Elss(60000));
 
             var salary = new AnnualSalary {Epf = 0};
-            TaxStatement ts = new TaxStatement(salary) { Chapter6Investments = investments };
+            TaxStatement ts = new TaxStatement(salary, null) { Chapter6Investments = investments };
             Assert.AreEqual(Chapter6Investments.Cap, ts.GetChapter6Deductions(), 0.01);
         }
 
@@ -56,7 +56,7 @@ namespace InstaTax.Tests{
             investments.Add(new PublicProvidentFund(ppfContribution));
 
             var salary = new AnnualSalary {Epf = 0};
-            TaxStatement ts = new TaxStatement(salary) { Chapter6Investments = investments };
+            TaxStatement ts = new TaxStatement(salary, null) { Chapter6Investments = investments };
             Assert.AreEqual(ppfContribution, ts.GetChapter6Deductions(), 0.01);
         }
 
@@ -69,7 +69,7 @@ namespace InstaTax.Tests{
             investments.Add(new PublicProvidentFund(19999.9));
 
             var salary = new AnnualSalary {Epf = 0};
-            TaxStatement ts = new TaxStatement(salary) { Chapter6Investments = investments };
+            TaxStatement ts = new TaxStatement(salary, null) { Chapter6Investments = investments };
             Assert.AreEqual(99999.99, ts.GetChapter6Deductions(), 0.01);
         }
 
@@ -81,7 +81,7 @@ namespace InstaTax.Tests{
             investments.Add(new PublicProvidentFund(20000.01));
 
             var salary = new AnnualSalary {Epf = 0 };
-            TaxStatement ts = new TaxStatement(salary) { Chapter6Investments = investments };
+            TaxStatement ts = new TaxStatement(salary, null) { Chapter6Investments = investments };
             Assert.AreEqual(Chapter6Investments.Cap, ts.GetChapter6Deductions(), 0.01);
         }
 
@@ -89,7 +89,7 @@ namespace InstaTax.Tests{
         [Test]
         public void ShouldReturnNoDeductionIfEpfIsNotAvailableAndNoOtherInvestmentIsMade(){
             var salary = new AnnualSalary {Epf = 0};
-            TaxStatement ts = new TaxStatement(salary);
+            TaxStatement ts = new TaxStatement(salary, null);
             Assert.AreEqual(0, ts.GetChapter6Deductions(), 0.01);
         }
 
@@ -97,7 +97,7 @@ namespace InstaTax.Tests{
         public void ShouldReturnEpfAsDeductionIfNoOtherInvestmentIsMade(){
             const int epfContribution = 100;
             var salary = new AnnualSalary {Epf = epfContribution};
-            TaxStatement ts = new TaxStatement(salary) { Chapter6Investments = null };
+            TaxStatement ts = new TaxStatement(salary, null) { Chapter6Investments = null };
             Assert.AreEqual(epfContribution, ts.GetChapter6Deductions(), 0.01);
         }
 
@@ -109,7 +109,7 @@ namespace InstaTax.Tests{
             investments.Add(new PublicProvidentFund(10000));
 
             var salary = new AnnualSalary {Epf = 9999.99};
-            TaxStatement ts = new TaxStatement(salary) { Chapter6Investments = investments };
+            TaxStatement ts = new TaxStatement(salary, null) { Chapter6Investments = investments };
             Assert.AreEqual(99999.99, ts.GetChapter6Deductions(), 0.01);
         }
 
@@ -122,7 +122,7 @@ namespace InstaTax.Tests{
             investments.Add(new PublicProvidentFund(10000));
 
             var salary = new AnnualSalary {Epf = 500000};
-            TaxStatement ts = new TaxStatement(salary) { Chapter6Investments = investments };
+            TaxStatement ts = new TaxStatement(salary, null) { Chapter6Investments = investments };
             Assert.AreEqual(Chapter6Investments.Cap, ts.GetChapter6Deductions(), 0.01);
         }
 
@@ -139,7 +139,7 @@ namespace InstaTax.Tests{
             investments.Add(new HousingLoanPrincipal(100001));
             var salary = new AnnualSalary { Epf = 0 };
 
-            TaxStatement ts = new TaxStatement(salary) { Chapter6Investments = investments };
+            TaxStatement ts = new TaxStatement(salary, null) { Chapter6Investments = investments };
 
             Assert.AreEqual(Chapter6Investments.Cap, ts.GetChapter6Deductions(), 0.01);
         }
@@ -151,7 +151,7 @@ namespace InstaTax.Tests{
             investments.Add(new HousingLoanPrincipal(90001));
             var salary = new AnnualSalary { Epf = 10000 };
 
-            TaxStatement ts = new TaxStatement(salary) { Chapter6Investments = investments };
+            TaxStatement ts = new TaxStatement(salary, null) { Chapter6Investments = investments };
 
             Assert.AreEqual(Chapter6Investments.Cap, ts.GetChapter6Deductions(), 0.01);
         }
@@ -163,7 +163,7 @@ namespace InstaTax.Tests{
             investments.Add(new HousingLoanPrincipal(60001));
             var salary = new AnnualSalary { Epf = 10000 };
 
-            TaxStatement ts = new TaxStatement(salary) { Chapter6Investments = investments };
+            TaxStatement ts = new TaxStatement(salary, null) { Chapter6Investments = investments };
 
             Assert.AreEqual(70001, ts.GetChapter6Deductions(), 0.01);
         }
@@ -175,7 +175,7 @@ namespace InstaTax.Tests{
             investments.Add(new HousingLoanPrincipal(60001));
             var salary = new AnnualSalary { Epf = 0 };
 
-            TaxStatement ts = new TaxStatement(salary) { Chapter6Investments = investments };
+            TaxStatement ts = new TaxStatement(salary, null) { Chapter6Investments = investments };
 
             Assert.AreEqual(60001, ts.GetChapter6Deductions(), 0.01);
         }

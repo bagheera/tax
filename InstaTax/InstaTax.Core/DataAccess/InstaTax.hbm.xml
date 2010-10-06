@@ -24,6 +24,7 @@
     <id name="Id">
       <generator class="native"/>
     </id>
+    <one-to-one name="AnnualSalary" foreign-key="Annual_Salary_Id"  />
     <component class="InstaTax.Core.DomainObjects.OtherIncomes" name="OtherIncomes">
       <bag name="otherIncomeItems" cascade="save-update" access="field" lazy="true">
         <key column="taxStatementId"/>
@@ -35,7 +36,7 @@
   <class name="InstaTax.Core.DomainObjects.AnnualSalary" table="AnnualSalary">
     <id name="Id">
       <generator class="native" />
-    </id>
+    </id>    
     <property name="Basic" column="Basic" type="Double"/>
     <property name="ProfessionalTax" column="ProfessionalTax" type="Double"/>
     <property name="Hra" column="HRA" type="Double"/>
