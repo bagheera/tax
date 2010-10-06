@@ -27,7 +27,23 @@
       <generator class="native" />
     </id>
     <one-to-one name="AnnualSalary" foreign-key="Annual_Salary_Id"  />
-    
+    <component name="DonationsUnder80G">
+      <bag name="Donations" access="field" cascade="save-update">
+        <key column="TaxStatement" />
+        <one-to-many class="DonationUnder80G"/>
+      </bag>
+    </component>
+  </class>
+
+  <class name="InstaTax.Core.DomainObjects.DonationUnder80G" table="DonationUnder80G" abstract="true">
+    <id name="Id">
+      <generator class="native" />
+    </id>
+    <discriminator column="DonationType"/>
+    <property name="Amount" access="field"/>
+    <many-to-one name="TaxStatement" access="property" column="Tax_Statement_Id"/>  
+    <subclass  name="HalfExemptDonation" discriminator-value="HALFEXEMPTED" />
+    <subclass  name="FullyExemptDonation" discriminator-value="FULLYEXEMPTED" />
   </class>
   
 </hibernate-mapping>

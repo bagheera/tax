@@ -52,6 +52,7 @@ namespace InstaTax.Tests
             List<TaxStatement> taxStatements = repository.LoadAll<TaxStatement>();
             var loadedTaxStatement = taxStatements.FirstOrDefault(stmt => stmt.Id == taxStatement.Id);
             Assert.IsNotNull(loadedTaxStatement);
+            Assert.AreEqual(2,loadedTaxStatement.NumberOfDonations());
         }
     }
 }

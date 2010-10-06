@@ -77,5 +77,9 @@
             
             return TaxSlabs.GetInstance().ComputeTax(netTaxableIncome, TaxPayer)-(AnnualSalary.ProfessionalTax + AnnualSalary.TaxDedeuctedAtSource);
         }
+
+        public virtual int NumberOfDonations(){
+            return DonationsUnder80G.NumberOfDonations();
+        }
     }
 }
