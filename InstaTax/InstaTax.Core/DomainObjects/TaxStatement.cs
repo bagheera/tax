@@ -1,23 +1,28 @@
-﻿using System;
-using InstaTax.Core.DomainObjects;
-
-namespace InstaTax.Core
+﻿namespace InstaTax.Core.DomainObjects
 {
     public class TaxStatement
     {
-        public AnnualSalary AnnualSalary { get; set; }
 
-        public OtherIncomes OtherIncomes { get; set; }
+        public virtual int Id { get; protected set; }
 
-        public Chapter6Investments Chapter6Investments { get; set; }
+        public virtual AnnualSalary AnnualSalary { get; set; }
+
+        public virtual OtherIncomes OtherIncomes { get; set; }
+
+        public virtual Chapter6Investments Chapter6Investments { get; set; }
 
         private DonationsUnder80G donationsUnder80G = new DonationsUnder80G();
+
         public virtual DonationsUnder80G DonationsUnder80G
         {
             protected get { return donationsUnder80G; }
             set { donationsUnder80G = value ?? new DonationsUnder80G(); }
         }
 
+        protected TaxStatement()
+        {
+            
+        }
 
         public TaxStatement(AnnualSalary annualSalary)
         {
@@ -60,7 +65,7 @@ namespace InstaTax.Core
             return taxPayer.HousingLoanInterest == null ? 0 : taxPayer.HousingLoanInterest.GetAllowedExemption();
         }
 
-        public double CalculateNetPayableTax(User taxPayer)
+        public virtual double CalculateNetPayableTax(User taxPayer)
         {
             double netTaxableIncome = CalculateGrossIncome(taxPayer)
                                       - GetChapter6Deductions();

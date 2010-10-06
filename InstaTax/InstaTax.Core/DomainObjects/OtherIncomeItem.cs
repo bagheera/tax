@@ -4,9 +4,14 @@ namespace InstaTax.Core.DomainObjects
 {
     public class OtherIncomeItem
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public double Amount { get; set; }
+        public virtual int Id { get; protected set; }
+        public virtual string Name { get; set; }
+        public virtual double Amount { get; set; }
+
+        protected OtherIncomeItem()
+        {
+            // DO NOTHING
+        }
 
         public OtherIncomeItem(string name, double amount)
         {
