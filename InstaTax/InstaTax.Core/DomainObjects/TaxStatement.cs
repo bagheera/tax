@@ -17,7 +17,7 @@
 
         private DonationsUnder80G donationsUnder80G = new DonationsUnder80G();
 
-        private User TaxPayer { get; set; }
+        public virtual User TaxPayer { get; private set; }
 
         public virtual DonationsUnder80G DonationsUnder80G
         {
