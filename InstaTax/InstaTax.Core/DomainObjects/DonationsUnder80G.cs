@@ -5,11 +5,11 @@ namespace InstaTax.Core.DomainObjects
 {
     public class DonationsUnder80G
     {
-        private List<DonationUnder80G> donations = new List<DonationUnder80G>();
+        protected IList<DonationUnder80G> Donations = new List<DonationUnder80G>();
         public double GetDeduction()
         {
             double total = 0;
-            foreach (var donationUnder80G in donations)
+            foreach (var donationUnder80G in Donations)
             {
                 total += donationUnder80G.GetDeduction();
             }
@@ -18,7 +18,11 @@ namespace InstaTax.Core.DomainObjects
 
         public void AddDonation(DonationUnder80G donationUnder80G)
         {
-            donations.Add(donationUnder80G);
+            Donations.Add(donationUnder80G);
+        }
+
+        public virtual int NumberOfDonations(){
+            return Donations.Count;
         }
     }
 }

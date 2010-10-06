@@ -17,7 +17,7 @@
 
         private DonationsUnder80G donationsUnder80G = new DonationsUnder80G();
 
-        private User TaxPayer { get; set; }
+        public virtual User TaxPayer { get; private set; }
 
         public virtual DonationsUnder80G DonationsUnder80G
         {
@@ -73,6 +73,10 @@
                                       - GetChapter6Deductions();
             
             return TaxSlabs.GetInstance().ComputeTax(netTaxableIncome, TaxPayer)-(AnnualSalary.ProfessionalTax + AnnualSalary.TaxDedeuctedAtSource);
+        }
+
+        public virtual int NumberOfDonations(){
+            return DonationsUnder80G.NumberOfDonations();
         }
     }
 }

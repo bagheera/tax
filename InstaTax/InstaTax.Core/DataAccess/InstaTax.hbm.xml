@@ -20,19 +20,6 @@
     <property name="Amount" type="Double" not-null="true"/>
   </class>
 
-  <class name="InstaTax.Core.DomainObjects.TaxStatement" table="TaxStatement">
-    <id name="Id">
-      <generator class="native"/>
-    </id>
-    <one-to-one name="AnnualSalary" foreign-key="Annual_Salary_Id"  />
-    <component class="InstaTax.Core.DomainObjects.OtherIncomes" name="OtherIncomes">
-      <bag name="otherIncomeItems" cascade="save-update" access="field" lazy="true">
-        <key column="taxStatementId"/>
-        <one-to-many class="InstaTax.Core.DomainObjects.OtherIncomeItem"/>
-      </bag>
-    </component>
-  </class>
-
   <class name="InstaTax.Core.DomainObjects.AnnualSalary" table="AnnualSalary">
     <id name="Id">
       <generator class="native" />
@@ -41,6 +28,37 @@
     <property name="ProfessionalTax" column="ProfessionalTax" type="Double"/>
     <property name="Hra" column="HRA" type="Double"/>
     <property name="SpecialAllowance" column="SpecialAllowance" type="Double"/>
+  </class>
+
+  <class name="InstaTax.Core.DomainObjects.TaxStatement" table="TaxStatement">
+    <id name="Id">
+      <generator class="native" />
+    </id>
+    <one-to-one name="AnnualSalary" foreign-key="Annual_Salary_Id"  />
+    <component name="DonationsUnder80G">
+      <bag name="Donations" access="field" cascade="save-update">
+        <key column="TaxStatement" />
+        <one-to-many class="DonationUnder80G"/>
+      </bag>
+    </component>
+    <one-to-one name="TaxPayer" foreign-key="User_Id"  />
+    <component class="InstaTax.Core.DomainObjects.OtherIncomes" name="OtherIncomes">
+      <bag name="otherIncomeItems" cascade="save-update" access="field" lazy="true">
+        <key column="taxStatementId"/>
+        <one-to-many class="InstaTax.Core.DomainObjects.OtherIncomeItem"/>
+      </bag>
+    </component>
+  </class>
+
+  <class name="InstaTax.Core.DomainObjects.DonationUnder80G" table="DonationUnder80G" abstract="true">
+    <id name="Id">
+      <generator class="native" />
+    </id>
+    <discriminator column="DonationType"/>
+    <property name="Amount" access="field"/>
+    <many-to-one name="TaxStatement" access="property" column="Tax_Statement_Id"/>  
+    <subclass  name="HalfExemptDonation" discriminator-value="HALFEXEMPTED" />
+    <subclass  name="FullyExemptDonation" discriminator-value="FULLYEXEMPTED" />
   </class>
 
   <class name="InstaTax.Core.DomainObjects.Investment" table="Chapter6Investments">

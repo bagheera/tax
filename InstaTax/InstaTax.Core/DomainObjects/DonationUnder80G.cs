@@ -2,13 +2,16 @@
 
 namespace InstaTax.Core.DomainObjects
 {
-    public class DonationUnder80G{
+    public abstract class DonationUnder80G{
+        protected virtual TaxStatement TaxStatement { get; set; }
         public virtual int Id { get; protected set; }
         
-        protected readonly double Amount;
-
-        protected DonationUnder80G(double amount)
-        {
+        protected double Amount;
+        protected  DonationUnder80G(){
+           
+        }
+        protected DonationUnder80G(double amount, TaxStatement taxStatement){
+            TaxStatement = taxStatement;
             if (amount>=0)
             {
                 this.Amount = amount;   
@@ -17,9 +20,7 @@ namespace InstaTax.Core.DomainObjects
             {
                 throw new ArgumentOutOfRangeException("Donation cannot be negative");
             }
-            
         }
-
 
         public virtual double GetDeduction()
         {
@@ -30,7 +31,7 @@ namespace InstaTax.Core.DomainObjects
     public class HalfExemptDonation : DonationUnder80G
     {
         private string type = "HALFEXEMPTED";
-        public HalfExemptDonation(double amount) : base(amount)
+        public HalfExemptDonation(double amount) : base(amount, null)
         {
            
         }
@@ -39,14 +40,28 @@ namespace InstaTax.Core.DomainObjects
         {
             return this.Amount * 0.5;
         }
+        protected HalfExemptDonation() : base(){
+            
+        }
+        protected HalfExemptDonation(double amount, TaxStatement taxStatement) : base(amount, taxStatement){
+            
+        }
     }
 
     public class FullyExemptDonation : DonationUnder80G
     {
         private string type = "FULLYEXEMPTED";
-        public FullyExemptDonation(double amount) : base(amount)
+        public FullyExemptDonation(double amount) : base(amount, null)
         {
 
+        }
+        protected FullyExemptDonation() : base(){
+            
+        }
+        protected FullyExemptDonation(double amount, TaxStatement taxStatement)
+            : base(amount, taxStatement)
+        {
+            
         }
     }
 }
