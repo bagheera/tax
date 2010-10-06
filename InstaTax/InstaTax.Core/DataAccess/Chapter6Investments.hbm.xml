@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" auto-import="true" assembly="InstaTax.Core" namespace="InstaTax.Core.DomainObjects">
+
+  <class name="InstaTax.Core.DomainObjects.Investment" table="Chapter6Investments">
+    <id name="Id">
+      <generator class="native" />
+    </id>
+    <discriminator column="InvetsmentType " type="string"/>
+    <property name="amount" access="field" type="double" />
+    <subclass name="LifeInsurance" discriminator-value="LifeInsurance">
+    </subclass>
+    <subclass name="Elss" discriminator-value="Elss">
+    </subclass>
+    <subclass name="PublicProvidentFund" discriminator-value="PublicProvidentFund">
+    </subclass>
+    <subclass name="HousingLoanPrincipal" discriminator-value="HousingLoanPrincipal">
+    </subclass>
+  </class> 
+</hibernate-mapping>

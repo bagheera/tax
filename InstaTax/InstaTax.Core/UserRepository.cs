@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using InstaTax.Core.DomainObjects;
 using NHibernate;
 
@@ -8,6 +9,7 @@ namespace InstaTax.Core
     public class UserRepository : NHibernateSetup, IUserRepository
     {
         public UserRepository()
+            : base(new FileInfo[]{new FileInfo("DataAccess/InstaTax.hbm.xml") })
         {
         }
 
@@ -40,5 +42,28 @@ namespace InstaTax.Core
 
             return null;
         }
+    }
+
+    public class Chapter6InvestmentRepository:NHibernateSetup{
+        public Chapter6InvestmentRepository()
+            : base(new FileInfo[] { new FileInfo("DataAccess/Chapter6Investments.hbm.xml") })
+        {
+           
+        }
+
+        public void Save(Investment investment){
+            Session.Save(investment);
+        }
+
+        public Investment GetInvestmentDetails(int InvestmentId)
+        {
+            IQuery query = Session.CreateQuery("from  Investment where Id=:InvestmentId").SetParameter("InvestmentId",InvestmentId);
+            
+            IList<Investment> listOfInvestments = query.List<Investment>();
+
+            return listOfInvestments[0];
+
+        }
+
     }
 }

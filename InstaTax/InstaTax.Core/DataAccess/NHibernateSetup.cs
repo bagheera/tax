@@ -13,9 +13,9 @@ namespace InstaTax.Core
         protected static Configuration Configuration;
         protected ISession Session  { get; set;}
 
-        public NHibernateSetup()
+        public NHibernateSetup(FileInfo[] nHibernateMappingFiles)
         {
-            InitalizeSessionFactory(new FileInfo("DataAccess/InstaTax.hbm.xml"));
+            InitalizeSessionFactory(nHibernateMappingFiles);
             Session = CreateSession();
         }
 
