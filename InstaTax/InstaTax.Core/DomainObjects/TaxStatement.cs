@@ -17,16 +17,13 @@
 
         private DonationsUnder80G donationsUnder80G = new DonationsUnder80G();
 
-        private User TaxPayer { get; set; }
+        public virtual User TaxPayer { get; private set; }
 
         public virtual DonationsUnder80G DonationsUnder80G
         {
             protected get { return donationsUnder80G; }
             set { donationsUnder80G = value ?? new DonationsUnder80G(); }
         }
-
-
-
 
         public TaxStatement(AnnualSalary annualSalary, User taxPayer)
         {
