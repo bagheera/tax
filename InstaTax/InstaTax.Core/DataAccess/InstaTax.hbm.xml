@@ -42,5 +42,21 @@
     <property name="Hra" column="HRA" type="Double"/>
     <property name="SpecialAllowance" column="SpecialAllowance" type="Double"/>
   </class>
-  
+
+  <class name="InstaTax.Core.DomainObjects.Investment" table="Chapter6Investments">
+    <id name="Id">
+      <generator class="native" />
+    </id>
+    <discriminator column="InvetsmentType " type="string"/>
+    <property name="amount" access="field" type="double" />
+    <subclass name="LifeInsurance" discriminator-value="LifeInsurance">
+    </subclass>
+    <subclass name="Elss" discriminator-value="Elss">
+    </subclass>
+    <subclass name="PublicProvidentFund" discriminator-value="PublicProvidentFund">
+    </subclass>
+    <subclass name="HousingLoanPrincipal" discriminator-value="HousingLoanPrincipal">
+    </subclass>
+  </class>
+
 </hibernate-mapping>
