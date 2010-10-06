@@ -8,6 +8,11 @@ namespace InstaTax.Core.DomainObjects
     {
         private readonly List<OtherIncomeItem> otherIncomeItems = new List<OtherIncomeItem>();
 
+        public OtherIncomes()
+        {
+            // DO NOTHING
+        }
+
         public void Add(OtherIncomeItem otherIncomeItemToAdd)
         {
             if (otherIncomeItemToAdd == null) throw new ArgumentNullException();

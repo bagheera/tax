@@ -12,6 +12,28 @@
     </component>
   </class>
 
+  <class name="InstaTax.Core.DomainObjects.OtherIncomeItem" table="OtherIncomeItem">
+    <id name="Id">
+      <generator class="native"/>
+    </id>
+    <property name="Name" type="String" length="120" not-null="true"/>
+    <property name="Amount" type="Double" not-null="true"/>
+  </class>
+
+  <class name="InstaTax.Core.DomainObjects.TaxStatement" table="TaxStatement">
+    <id name="Id">
+      <generator class="native"/>
+    </id>
+    <one-to-one name="AnnualSalary" foreign-key="Annual_Salary_Id"  />
+    <one-to-one name="TaxPayer" foreign-key="User_Id"  />
+    <component class="InstaTax.Core.DomainObjects.OtherIncomes" name="OtherIncomes">
+      <bag name="otherIncomeItems" cascade="save-update" access="field" lazy="true">
+        <key column="taxStatementId"/>
+        <one-to-many class="InstaTax.Core.DomainObjects.OtherIncomeItem"/>
+      </bag>
+    </component>
+  </class>
+
   <class name="InstaTax.Core.DomainObjects.AnnualSalary" table="AnnualSalary">
     <id name="Id">
       <generator class="native" />
@@ -21,14 +43,4 @@
     <property name="Hra" column="HRA" type="Double"/>
     <property name="SpecialAllowance" column="SpecialAllowance" type="Double"/>
   </class>
-
-  <class name="InstaTax.Core.DomainObjects.TaxStatement" table="TaxStatement">
-    <id name="Id">
-      <generator class="native" />
-    </id>
-    <one-to-one name="AnnualSalary" foreign-key="Annual_Salary_Id"  />
-    <one-to-one name="TaxPayer" foreign-key="User_Id"  />
-    
-  </class>
-  
 </hibernate-mapping>

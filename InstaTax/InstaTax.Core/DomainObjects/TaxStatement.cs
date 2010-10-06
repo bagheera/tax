@@ -25,9 +25,6 @@
             set { donationsUnder80G = value ?? new DonationsUnder80G(); }
         }
 
-
-
-
         public TaxStatement(AnnualSalary annualSalary, User taxPayer)
         {
             AnnualSalary = annualSalary;
