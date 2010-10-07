@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using InstaTax.Core;
@@ -39,9 +40,16 @@ namespace InstaTax.Tests
         public void ShouldSaveAndLoadTaxStatement()
         {
             IRepository repository = new Repository();
+            var password = new Password { PasswordString = "abc" };
+            var email = new EmailAddress("balaji@gmail.com");
+            var taxPayer= new User(email, password);
 
+            taxPayer.FromMetro = true;
+            taxPayer.RentPaid = 8000.00;
+            
+  
             AnnualSalary salary = new AnnualSalary() { Basic = 10000, Epf = 2000, Hra = 6000, Id = "salary", ProfessionalTax = 200, SpecialAllowance = 5000, TaxDedeuctedAtSource = 5000};
-            TaxStatement taxStatement = new TaxStatement(salary, null);
+            TaxStatement taxStatement = new TaxStatement(salary, taxPayer);
 
             DonationsUnder80G donationsUnder80G = new DonationsUnder80G();
             donationsUnder80G.AddDonation(new HalfExemptDonation(20000));
@@ -52,6 +60,8 @@ namespace InstaTax.Tests
             List<TaxStatement> taxStatements = repository.LoadAll<TaxStatement>();
             var loadedTaxStatement = taxStatements.FirstOrDefault(stmt => stmt.Id == taxStatement.Id);
             Assert.IsNotNull(loadedTaxStatement);
+            Assert.IsNotNull(loadedTaxStatement.TaxPayer);
+
         }
         
         [Test]

@@ -180,6 +180,15 @@ namespace InstaTax.Tests{
             Assert.AreEqual(60001, ts.GetChapter6Deductions(), 0.01);
         }
 
+        [Test]
+        public void ShouldSaveTheInvestment(){
+            Repository chapter6InvestmentRepo = new Repository();
+
+            Investment LICInvestment = new LifeInsurance(10000);
+            chapter6InvestmentRepo.SaveInvestment(LICInvestment);
+            Assert.AreEqual(LICInvestment.GetAmount(), chapter6InvestmentRepo.GetInvestmentDetails(LICInvestment.Id).GetAmount());
+
+        }
     }
 
     

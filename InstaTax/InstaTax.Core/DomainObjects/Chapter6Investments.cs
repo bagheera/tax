@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 
-namespace InstaTax.Core{
+namespace InstaTax.Core.DomainObjects{
     public class Chapter6Investments {
         private readonly List<Investment> investments = new List<Investment>();
         public const int Cap = 100000;
@@ -17,6 +17,8 @@ namespace InstaTax.Core{
     }
 
     public class Investment {
+
+        public virtual  int Id { get; set; }
         private readonly double amount;
 
         protected Investment(double amount){
@@ -26,16 +28,28 @@ namespace InstaTax.Core{
         public virtual double GetAmount(){
             return amount;
         }
+
+        protected Investment(){
+            
+        }
     }
 
     public class LifeInsurance : Investment{
         public LifeInsurance(double amount) : base(amount){
+        }
+
+        protected LifeInsurance(){
+            
         }
     }
 
     public class Elss : Investment{
         public Elss(double amount)
             : base(amount){
+        }
+
+        protected Elss(){
+            
         }
     }
 
@@ -50,6 +64,10 @@ namespace InstaTax.Core{
         public override double GetAmount(){
             return base.GetAmount() <= Cap ? base.GetAmount() : Cap;
         }
+
+        protected PublicProvidentFund(){
+            
+        }
     }
 
     public class HousingLoanPrincipal : Investment
@@ -57,6 +75,10 @@ namespace InstaTax.Core{
         public HousingLoanPrincipal(double amount)
             : base(amount)
         {
+            
+        }
+
+        protected HousingLoanPrincipal(){
             
         }
     }
