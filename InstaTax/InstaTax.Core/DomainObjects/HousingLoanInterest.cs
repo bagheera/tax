@@ -1,11 +1,18 @@
 ﻿namespace InstaTax.Core.DomainObjects{
-    public class HousingLoanInterest : ITaxExemptable{
+    public class HousingLoanInterest {
+        
+        
+        public  double Amount { get; set; }
 
         private const double Cap = 150000;
 
-        private double Amount { get; set; }
+        public HousingLoanInterest()
+        {
+           
+        }
 
-        public HousingLoanInterest(double amount){
+        public HousingLoanInterest(double amount)
+        {
             Amount = amount;
         }
 

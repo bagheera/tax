@@ -11,7 +11,7 @@ namespace InstaTax.Core.DomainObjects
         
         public virtual AnnualSalary AnnualSalary { get; set; }
 
-        public virtual ITaxExemptable HousingLoanInterest { get; set; }
+        public virtual HousingLoanInterest HousingLoanInterest { get; set; }
 
         public virtual OtherIncomes OtherIncomes { get; set; }
 

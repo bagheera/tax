@@ -103,7 +103,6 @@
     <Compile Include="DomainObjects\EmailAddress.cs" />
     <Compile Include="DomainObjects\Chapter6Investments.cs" />
     <Compile Include="DomainObjects\HousingLoanInterest.cs" />
-    <Compile Include="DomainObjects\ITaxExemptable.cs" />
     <Compile Include="DomainObjects\OtherIncomeItem.cs" />
     <Compile Include="DomainObjects\OtherIncomes.cs" />
     <Compile Include="DomainObjects\TaxStatement.cs" />
