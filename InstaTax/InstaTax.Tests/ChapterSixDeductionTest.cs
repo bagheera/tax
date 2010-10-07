@@ -189,6 +189,29 @@ namespace InstaTax.Tests{
             Assert.AreEqual(LICInvestment.GetAmount(), chapter6InvestmentRepo.GetInvestmentDetails(LICInvestment.Id).GetAmount());
 
         }
+
+        [Test]
+        public void ShouldSaveTheInvestmentAlongWithTaxStatement()
+        {
+            var taxPayer = new User(0, true, Gender.Female);
+            TaxSlabs ts = TaxSlabs.GetInstance();
+            AnnualSalary asal = new AnnualSalary
+            {
+                Basic = 600000,
+                Hra = 100000
+            };
+            TaxStatement stmt = new TaxStatement(asal, taxPayer);
+            stmt.Chapter6Investments=  new Chapter6Investments();
+            LifeInsurance LICInvestment=new LifeInsurance(10000);
+            stmt.Chapter6Investments.Add(LICInvestment);
+            LICInvestment.TaxStatement = stmt;
+
+            Repository taxStatementRepo=new Repository();
+            taxStatementRepo.Save(stmt);
+
+            Assert.AreEqual(LICInvestment.GetAmount(), taxStatementRepo.GetInvestmentDetails(stmt.Id).GetAmount());
+
+        }
     }
 
     

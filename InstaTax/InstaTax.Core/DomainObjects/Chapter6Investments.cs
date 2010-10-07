@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace InstaTax.Core.DomainObjects{
     public class Chapter6Investments {
-        private readonly List<Investment> investments = new List<Investment>();
+        private readonly IList<Investment> investments = new List<Investment>();
         public const int Cap = 100000;
 
         public double GetTotal(){
@@ -20,7 +20,7 @@ namespace InstaTax.Core.DomainObjects{
 
         public virtual  int Id { get; set; }
         private readonly double amount;
-
+        public virtual TaxStatement TaxStatement { get; set; }
         protected Investment(double amount){
             this.amount = amount;
         }

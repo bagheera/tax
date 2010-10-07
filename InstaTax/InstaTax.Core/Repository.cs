@@ -59,9 +59,9 @@ namespace InstaTax.Core
             Session.Save(investment);
         }
 
-        public Investment GetInvestmentDetails(int InvestmentId)
+        public Investment GetInvestmentDetails(int taxStatementId)
         {
-            IQuery query = Session.CreateQuery("from  Investment where Id=:InvestmentId").SetParameter("InvestmentId", InvestmentId);
+            IQuery query = Session.CreateQuery("from  Investment ");//"where TaxStatement=: taxStatementId").SetParameter("taxStatementId", taxStatementId);
 
             IList<Investment> listOfInvestments = query.List<Investment>();
 

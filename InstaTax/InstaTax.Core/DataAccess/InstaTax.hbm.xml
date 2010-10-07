@@ -37,8 +37,14 @@
     <one-to-one name="AnnualSalary" foreign-key="Annual_Salary_Id"  />
     <component name="DonationsUnder80G">
       <bag name="Donations" access="field" cascade="save-update">
-        <key column="TaxStatement" />
+        <key   column="TaxStatement" />
         <one-to-many class="DonationUnder80G"/>
+      </bag>
+    </component>
+    <component name="Chapter6Investments">
+      <bag name="investments" access="field" cascade="save-update">
+        <key column="TaxStatement"/>
+        <one-to-many class="Investment"/>
       </bag>
     </component>
     <one-to-one name="TaxPayer" foreign-key="User_Id"  />
@@ -65,11 +71,12 @@
     <id name="Id">
       <generator class="native" />
     </id>
-    <discriminator column="InvetsmentType " type="string"/>
+    <discriminator column="InvetsmentType " type="string" />
     <property name="amount" access="field" type="double" />
+    <many-to-one name="TaxStatement"  column="TaxStatement"/>
     <subclass name="LifeInsurance" discriminator-value="LifeInsurance">
     </subclass>
-    <subclass name="Elss" discriminator-value="Elss">
+    <subclass name="Elss" discriminator-value="Elss" >
     </subclass>
     <subclass name="PublicProvidentFund" discriminator-value="PublicProvidentFund">
     </subclass>
