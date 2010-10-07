@@ -142,7 +142,7 @@ namespace InstaTax.Tests{
         [TestCase((150000))]
         public void ShouldCapHousingLoanInterestExemptionIfAbove1Point5Lac(double testAmount){
 
-            ITaxExemptable housingLoanInterestAmount = new HousingLoanInterest(testAmount);
+            HousingLoanInterest housingLoanInterestAmount = new HousingLoanInterest(testAmount);
             Assert.AreEqual(150000, housingLoanInterestAmount.GetAllowedExemption());
         }
 
@@ -150,7 +150,7 @@ namespace InstaTax.Tests{
         public void ShouldCapHousingLoanInterestExemptionIfBelow1Point5Lac()
         {
 
-            ITaxExemptable housingLoanInterestAmount = new HousingLoanInterest(10000);
+            HousingLoanInterest housingLoanInterestAmount = new HousingLoanInterest(10000);
             Assert.AreEqual(10000, housingLoanInterestAmount.GetAllowedExemption());
         }
 

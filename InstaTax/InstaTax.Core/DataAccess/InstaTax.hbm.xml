@@ -42,6 +42,9 @@
       </bag>
     </component>
     <one-to-one name="TaxPayer" foreign-key="User_Id"  />
+    <component name="HousingLoanInterest">
+      <property  name="Amount" column="HousingLoanInterest" type="Double"/>
+    </component>
     <component class="InstaTax.Core.DomainObjects.OtherIncomes" name="OtherIncomes">
       <bag name="otherIncomeItems" cascade="save-update" access="field" lazy="true">
         <key column="taxStatementId"/>
