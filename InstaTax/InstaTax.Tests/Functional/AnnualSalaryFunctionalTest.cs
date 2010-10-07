@@ -8,7 +8,7 @@ using NUnit.Framework;
 
 namespace InstaTax.Tests.Functional
 {
-    [TestFixture]
+    [TestFixture, Category("FunctionalTest")]
     public class AnnualSalaryFunctionalTest
     {
         [Test]

@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 namespace InstaTax.Tests
 {
-    [TestFixture]
+   [TestFixture, Category("UnitTest")]
     public class TestTaxStatement
     {
         [Test]

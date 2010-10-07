@@ -1,4 +1,6 @@
-﻿namespace InstaTax.Core.DomainObjects
+﻿using System.Collections.Generic;
+
+namespace InstaTax.Core.DomainObjects
 {
     public class TaxStatement
     {
@@ -9,7 +11,7 @@
         
         public virtual AnnualSalary AnnualSalary { get; set; }
 
-        public virtual ITaxExemptable HousingLoanInterest { get; set; }
+        public virtual HousingLoanInterest HousingLoanInterest { get; set; }
 
         public virtual OtherIncomes OtherIncomes { get; set; }
 
@@ -77,6 +79,10 @@
 
         public virtual int NumberOfDonations(){
             return DonationsUnder80G.NumberOfDonations();
+        }
+
+        public virtual IEnumerable<DonationUnder80G> GetDonationsUnder80G(){
+            return DonationsUnder80G.GetDonations();
         }
     }
 }

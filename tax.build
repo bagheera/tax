@@ -33,12 +33,27 @@
 		</exec>
 	</target>
 	
-	<target name="test" description="tests the compilation">
+	<target name="test" description="tests the compilation" depends="clean, compile">
 		<nunit2>
 			<formatter type="Plain" />
-			<test assemblyname="${build.dir}/InstaTax.Tests.dll" />
+			<test assemblyname="${build.dir}/InstaTax.Tests.dll" >
+				<categories>
+					<include name="UnitTest" />
+				</categories>
+			</test>
 		</nunit2>
 	</target>
 	
-	<target name="build" depends="clean,compile,test" />	
+	<target name="ftest" description="tests the compilation" depends="clean, compile">
+		<nunit2>
+			<formatter type="Plain" />
+			<test assemblyname="${build.dir}/InstaTax.Tests.dll" >
+				<categories>
+					<include name="FunctionalTest" />
+				</categories>
+			</test>
+		</nunit2>
+	</target>
+	
+	<target name="build" depends="clean,compile,test,ftest" />	
 </project>
