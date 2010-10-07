@@ -26,6 +26,23 @@ namespace InstaTax.Core.DomainObjects
         {
             return this.Amount;
         }
+
+        private bool Equals(DonationUnder80G other){
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return other.Id == Id;
+        }
+
+        public override bool Equals(object obj){
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != typeof (DonationUnder80G)) return false;
+            return Equals((DonationUnder80G) obj);
+        }
+
+        public override int GetHashCode(){
+            return Id;
+        }
     }
 
     public class HalfExemptDonation : DonationUnder80G

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace InstaTax.Core.DomainObjects
 {
@@ -23,6 +24,10 @@ namespace InstaTax.Core.DomainObjects
 
         public virtual int NumberOfDonations(){
             return Donations.Count;
+        }
+
+        internal virtual IEnumerable<DonationUnder80G> GetDonations(){
+            return Donations.AsEnumerable();
         }
     }
 }

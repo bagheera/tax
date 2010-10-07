@@ -52,8 +52,10 @@ namespace InstaTax.Tests
             TaxStatement taxStatement = new TaxStatement(salary, taxPayer);
 
             DonationsUnder80G donationsUnder80G = new DonationsUnder80G();
-            donationsUnder80G.AddDonation(new HalfExemptDonation(20000));
-            donationsUnder80G.AddDonation(new FullyExemptDonation(10000));
+            var halfExemptDonation = new HalfExemptDonation(20000);
+            donationsUnder80G.AddDonation(halfExemptDonation);
+            var fullyExemptDonation = new FullyExemptDonation(10000);
+            donationsUnder80G.AddDonation(fullyExemptDonation);
             taxStatement.DonationsUnder80G = donationsUnder80G;
             repository.Save(taxStatement);
 
@@ -61,7 +63,8 @@ namespace InstaTax.Tests
             var loadedTaxStatement = taxStatements.FirstOrDefault(stmt => stmt.Id == taxStatement.Id);
             Assert.IsNotNull(loadedTaxStatement);
             Assert.IsNotNull(loadedTaxStatement.TaxPayer);
-
+            Assert.IsTrue(taxStatement.GetDonationsUnder80G().Contains(halfExemptDonation));
+            Assert.IsTrue(taxStatement.GetDonationsUnder80G().Contains(fullyExemptDonation));
         }
 
     }
