@@ -4,7 +4,7 @@ using InstaTax.Core.DomainObjects;
 using NUnit.Framework;
 
 namespace InstaTax.Tests{
-    [TestFixture]
+    [TestFixture, Category("UnitTest")]
     public class PasswordTest{
         [Test]
 

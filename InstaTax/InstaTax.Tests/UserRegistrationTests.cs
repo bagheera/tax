@@ -4,7 +4,7 @@ using Moq;
 using NUnit.Framework;
 
 namespace InstaTax.Tests{
-    [TestFixture]
+   [TestFixture, Category("UnitTest")]
     public class RegistrationTests
     {
         [Test]
@@ -36,16 +36,5 @@ namespace InstaTax.Tests{
 
         
 
-    }
-
-    [TestFixture]
-    public class UserTest
-    {
-        [Test]
-        public void ShouldReturnTrueIfTaxPayerIsFemale()
-        {
-            User taxPayer = new User(0, false, Gender.Female);
-            Assert.True(taxPayer.IsFemale());
-        }
     }
 }

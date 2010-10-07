@@ -3,7 +3,7 @@ using InstaTax.Core.DomainObjects;
 using NUnit.Framework;
 
 namespace InstaTax.Tests{
-    [TestFixture]
+    [TestFixture, Category("UnitTest")]
     public class TaxSlabsTest{
         User testMaleUser = new User(30000, false, Gender.Male);
         User testFemaleUser = new User(30000, false, Gender.Female);
